@@ -42,7 +42,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 'Siguiente', Color.fromRGBO(29, 53, 87, 1), context, '/'),
             Container(
                 margin: EdgeInsets.only(top: 46.0),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   border: Border(
                     top: BorderSide(
                       color: Colors.grey,
@@ -58,7 +58,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           Navigator.pushNamed(context, 'login');
                         },
                         child: RichText(
-                          text: TextSpan(
+                          text: const TextSpan(
                             text: '¿Ya tienes cuenta? ',
                             style: TextStyle(
                               fontSize: 16.0,
@@ -69,7 +69,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 text: 'Inicia Sesión',
                                 style: TextStyle(
                                   fontSize: 16.0,
-                                  color: Colors.red,
+                                  color: Color.fromRGBO(230, 57, 70, 1),
                                 ),
                               ),
                             ],

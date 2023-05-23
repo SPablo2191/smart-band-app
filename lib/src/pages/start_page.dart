@@ -10,6 +10,7 @@ class StartPage extends StatelessWidget {
           child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
+          _createImage(),
           _getButton('Iniciar Sesión', Color.fromRGBO(29, 53, 87, 1), context,
               'login'),
           _getButton('Registrarse', Colors.white, context, 'register',
@@ -38,7 +39,7 @@ class StartPage extends StatelessWidget {
 
   _createImage() {
     return Expanded(
-      child: Image(fit: BoxFit.contain, image: AssetImage('logo.jpg')),
+      child: Image(fit: BoxFit.contain, image: AssetImage('assets/logo.jpg')),
     );
   }
 }

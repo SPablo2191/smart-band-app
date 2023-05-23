@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+class RegisterStep1Page extends StatefulWidget {
+  const RegisterStep1Page({super.key});
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  State<RegisterStep1Page> createState() => _RegisterStep1PageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _RegisterStep1PageState extends State<RegisterStep1Page> {
   String _email = '';
   String _password = '';
   @override
@@ -38,8 +38,8 @@ class _RegisterPageState extends State<RegisterPage> {
             Container(
               height: 40,
             ),
-            _getButton(
-                'Siguiente', Color.fromRGBO(29, 53, 87, 1), context, '/'),
+            _getButton('Siguiente', Color.fromRGBO(29, 53, 87, 1), context,
+                'register/step2'),
             Container(
                 margin: EdgeInsets.only(top: 46.0),
                 decoration: const BoxDecoration(

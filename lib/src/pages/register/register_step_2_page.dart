@@ -8,6 +8,9 @@ class RegisterStep2Page extends StatefulWidget {
 }
 
 class _RegisterStep2PageState extends State<RegisterStep2Page> {
+  String _name = '';
+  String _DNI = '';
+  String _lastName = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,13 +26,16 @@ class _RegisterStep2PageState extends State<RegisterStep2Page> {
       body: ListView(
           padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
           children: [
-            Container(height: 100),
+            Container(height: 50),
+            _getDNI(),
             Container(
               height: 15,
             ),
+            _getName(),
             Container(
               height: 15,
             ),
+            _getLastName(),
             Container(
               height: 40,
             ),
@@ -73,6 +79,49 @@ class _RegisterStep2PageState extends State<RegisterStep2Page> {
                       ),
                     )))
           ]),
+    );
+  }
+
+  _getDNI() {
+    return TextField(
+      onChanged: (value) => setState(() {
+        _DNI = value;
+      }),
+      textCapitalization: TextCapitalization.sentences,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+        labelText: 'DNI',
+        helperText: '9 caracteres maximo',
+        prefixIcon: Icon(Icons.perm_identity),
+      ),
+    );
+  }
+
+  _getName() {
+    return TextField(
+      onChanged: (value) => setState(() {
+        _name = value;
+      }),
+      textCapitalization: TextCapitalization.sentences,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+        labelText: 'Nombre',
+        prefixIcon: Icon(Icons.perm_identity),
+      ),
+    );
+  }
+
+  _getLastName() {
+    return TextField(
+      onChanged: (value) => setState(() {
+        _lastName = value;
+      }),
+      textCapitalization: TextCapitalization.sentences,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+        labelText: 'Aoellido',
+        prefixIcon: Icon(Icons.perm_identity),
+      ),
     );
   }
 

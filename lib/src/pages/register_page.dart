@@ -40,12 +40,43 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             _getButton(
                 'Siguiente', Color.fromRGBO(29, 53, 87, 1), context, '/'),
-            Padding(
-              padding: const EdgeInsets.all(80.0),
-              child: Divider(
-                height: 40,
-              ),
-            )
+            Container(
+                margin: EdgeInsets.only(top: 46.0),
+                decoration: BoxDecoration(
+                  border: Border(
+                    top: BorderSide(
+                      color: Colors.grey,
+                      width: 1.0,
+                    ),
+                  ),
+                ),
+                child: Container(
+                    margin: EdgeInsets.only(top: 10),
+                    child: Center(
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, 'login');
+                        },
+                        child: RichText(
+                          text: TextSpan(
+                            text: '¿Ya tienes cuenta? ',
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              color: Colors.black,
+                            ),
+                            children: [
+                              TextSpan(
+                                text: 'Inicia Sesión',
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  color: Colors.red,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    )))
           ]),
     );
   }

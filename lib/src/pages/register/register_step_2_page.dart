@@ -89,7 +89,15 @@ class _RegisterStep2PageState extends State<RegisterStep2Page> {
       }),
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+        filled: true,
+        iconColor: Color.fromRGBO(29, 53, 87, 1),
+        labelStyle: TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
+        floatingLabelStyle: TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
+        hintStyle: TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
+        fillColor: Color.fromRGBO(221, 245, 246, 1),
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20.0),
+            borderSide: BorderSide(color: Color.fromRGBO(29, 53, 87, 1))),
         labelText: 'DNI',
         helperText: '9 caracteres maximo',
         prefixIcon: Icon(Icons.perm_identity),
@@ -104,7 +112,15 @@ class _RegisterStep2PageState extends State<RegisterStep2Page> {
       }),
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+        filled: true,
+        iconColor: Color.fromRGBO(29, 53, 87, 1),
+        labelStyle: TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
+        floatingLabelStyle: TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
+        hintStyle: TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
+        fillColor: Color.fromRGBO(221, 245, 246, 1),
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20.0),
+            borderSide: BorderSide(color: Color.fromRGBO(29, 53, 87, 1))),
         labelText: 'Nombre',
         prefixIcon: Icon(Icons.perm_identity),
       ),
@@ -118,8 +134,16 @@ class _RegisterStep2PageState extends State<RegisterStep2Page> {
       }),
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
-        labelText: 'Aoellido',
+        filled: true,
+        iconColor: Color.fromRGBO(29, 53, 87, 1),
+        labelStyle: TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
+        floatingLabelStyle: TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
+        hintStyle: TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
+        fillColor: Color.fromRGBO(221, 245, 246, 1),
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20.0),
+            borderSide: BorderSide(color: Color.fromRGBO(29, 53, 87, 1))),
+        labelText: 'Apellido',
         prefixIcon: Icon(Icons.perm_identity),
       ),
     );

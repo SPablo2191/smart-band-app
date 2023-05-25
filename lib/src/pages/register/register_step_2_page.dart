@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:smartband/src/models/school_model.dart';
 import 'package:smartband/src/providers/school_provider.dart';
 
@@ -13,6 +14,7 @@ class _RegisterStep2PageState extends State<RegisterStep2Page> {
   String _name = '';
   String _DNI = '';
   String _lastName = '';
+  List<School> schools = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -180,13 +182,53 @@ class _RegisterStep2PageState extends State<RegisterStep2Page> {
       future: schoolProvider.getSchools(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return Text((snapshot.data)![0].name ?? '');
+          final _items = snapshot.data
+              ?.map((school) =>
+                  MultiSelectItem<School?>(school, school.name ?? ''))
+              .toList() as List<MultiSelectItem<Object?>>;
+          return Container(
+            decoration: BoxDecoration(
+              color: const Color.fromRGBO(221, 245, 246, 1),
+              border: Border.all(
+                color: const Color.fromRGBO(29, 53, 87, 1),
+                width: 1,
+              ),
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            child: MultiSelectDialogField(
+                searchable: true,
+                listType: MultiSelectListType.CHIP,
+                dialogHeight: 160,
+                title: Text('Seleccionar'),
+                items: _items,
+                buttonIcon: const Icon(
+                  Icons.home_filled,
+                  color: Color.fromRGBO(29, 53, 87, 1),
+                ),
+                buttonText: const Text(
+                  "Colegio",
+                  style: TextStyle(
+                    color: Color.fromRGBO(29, 53, 87, 1),
+                    fontSize: 16,
+                  ),
+                ),
+                onConfirm: (results) {
+                  schools = results as List<School>;
+                }),
+          );
         } else if (snapshot.hasError) {
           return Text('${snapshot.error}');
         }
-
-        // By default, show a loading spinner.
-        return const CircularProgressIndicator();
+        return Container(
+          height: 1,
+          width: 10,
+          margin: const EdgeInsets.all(5),
+          child: const CircularProgressIndicator(
+            strokeWidth: 4,
+            valueColor:
+                AlwaysStoppedAnimation<Color>(Color.fromRGBO(29, 53, 87, 1)),
+          ),
+        );
       },
     );
   }

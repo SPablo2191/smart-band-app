@@ -17,3 +17,14 @@ class School {
     registerDate = json['registerDate'];
   }
 }
+class Schools {
+  List<School> items = [];
+  Schools();
+  Schools.fromJsonList(List<dynamic> jsonList) {
+    // if (jsonList == null) return;
+    for (var element in jsonList) {
+      final school = School.fromJsonMap(element);
+      items.add(school);
+    }
+  }
+}

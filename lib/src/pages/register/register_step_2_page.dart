@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smartband/src/models/school_model.dart';
 import 'package:smartband/src/providers/school_provider.dart';
 
 class RegisterStep2Page extends StatefulWidget {
@@ -175,16 +176,19 @@ class _RegisterStep2PageState extends State<RegisterStep2Page> {
 
   _getSchools() {
     final SchoolProvider schoolProvider = SchoolProvider();
-    print(schoolProvider.getSchools());
-    return SizedBox();
-    // return FutureBuilder(
-    //   future: schoolProvider.getSchools(),
-    //   builder: (BuildContext context, AsyncSnapshot snapshot) {
-    //     if (snapshot.data) {
-    //       print(snapshot.data);
-    //     } else {}
-    //     return SizedBox();
-    //   },
-    // );
+    return FutureBuilder(
+      future: schoolProvider.getSchools(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          print(snapshot.data);
+          return Text((snapshot.data)![0].name ?? '');
+        } else if (snapshot.hasError) {
+          return Text('${snapshot.error}');
+        }
+
+        // By default, show a loading spinner.
+        return const CircularProgressIndicator();
+      },
+    );
   }
 }

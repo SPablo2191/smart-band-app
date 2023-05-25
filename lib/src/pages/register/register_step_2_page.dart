@@ -180,7 +180,6 @@ class _RegisterStep2PageState extends State<RegisterStep2Page> {
       future: schoolProvider.getSchools(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          print(snapshot.data);
           return Text((snapshot.data)![0].name ?? '');
         } else if (snapshot.hasError) {
           return Text('${snapshot.error}');

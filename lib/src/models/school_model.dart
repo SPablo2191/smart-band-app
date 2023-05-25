@@ -17,6 +17,7 @@ class School {
     registerDate = json['registerDate'];
   }
 }
+
 class Schools {
   List<School> items = [];
   Schools();

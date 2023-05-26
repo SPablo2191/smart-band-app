@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:smartband/src/models/teacher_model.dart';
+import 'package:smartband/src/pages/register/register_step_2_page.dart';
 
 class RegisterStep1Page extends StatefulWidget {
   const RegisterStep1Page({super.key});
@@ -8,8 +10,14 @@ class RegisterStep1Page extends StatefulWidget {
 }
 
 class _RegisterStep1PageState extends State<RegisterStep1Page> {
-  String _email = '';
-  String _password = '';
+  final Teacher _teacher = Teacher(
+      id: 0,
+      name: '',
+      last_name: '',
+      DNI: '',
+      email: '',
+      password: '',
+      schools: []);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +31,7 @@ class _RegisterStep1PageState extends State<RegisterStep1Page> {
         backgroundColor: Colors.white,
       ),
       body: ListView(
-          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
           children: [
             Container(height: 100),
             _getEmail(),
@@ -38,10 +46,10 @@ class _RegisterStep1PageState extends State<RegisterStep1Page> {
             Container(
               height: 40,
             ),
-            _getButton('Siguiente', Color.fromRGBO(29, 53, 87, 1), context,
-                'register/step2'),
+            _getButton('Siguiente', const Color.fromRGBO(29, 53, 87, 1),
+                context, 'register/step2'),
             Container(
-                margin: EdgeInsets.only(top: 46.0),
+                margin: const EdgeInsets.only(top: 46.0),
                 decoration: const BoxDecoration(
                   border: Border(
                     top: BorderSide(
@@ -51,7 +59,7 @@ class _RegisterStep1PageState extends State<RegisterStep1Page> {
                   ),
                 ),
                 child: Container(
-                    margin: EdgeInsets.only(top: 10),
+                    margin: const EdgeInsets.only(top: 10),
                     child: Center(
                       child: GestureDetector(
                         onTap: () {
@@ -85,21 +93,23 @@ class _RegisterStep1PageState extends State<RegisterStep1Page> {
     return TextField(
       keyboardType: TextInputType.emailAddress,
       onChanged: (value) => setState(() {
-        _email = value;
+        _teacher.email = value;
       }),
       decoration: InputDecoration(
           filled: true,
-          iconColor: Color.fromRGBO(29, 53, 87, 1),
-          labelStyle: TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
-          floatingLabelStyle: TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
-          hintStyle: TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
-          fillColor: Color.fromRGBO(221, 245, 246, 1),
+          iconColor: const Color.fromRGBO(29, 53, 87, 1),
+          labelStyle: const TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
+          floatingLabelStyle:
+              const TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
+          hintStyle: const TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
+          fillColor: const Color.fromRGBO(221, 245, 246, 1),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20.0),
-              borderSide: BorderSide(color: Color.fromRGBO(29, 53, 87, 1))),
+              borderSide:
+                  const BorderSide(color: Color.fromRGBO(29, 53, 87, 1))),
           hintText: 'ej: ejemplo@gmail.com', //placeholder
           labelText: 'Email',
-          prefixIcon: Icon(Icons.email_rounded)),
+          prefixIcon: const Icon(Icons.email_rounded)),
     );
   }
 
@@ -107,39 +117,47 @@ class _RegisterStep1PageState extends State<RegisterStep1Page> {
     return TextField(
       obscureText: true,
       onChanged: (value) => setState(() {
-        _password = value;
+        _teacher.password = value;
       }),
       decoration: InputDecoration(
           filled: true,
-          iconColor: Color.fromRGBO(29, 53, 87, 1),
-          labelStyle: TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
-          floatingLabelStyle: TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
-          hintStyle: TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
-          fillColor: Color.fromRGBO(221, 245, 246, 1),
+          iconColor: const Color.fromRGBO(29, 53, 87, 1),
+          labelStyle: const TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
+          floatingLabelStyle:
+              const TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
+          hintStyle: const TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
+          fillColor: const Color.fromRGBO(221, 245, 246, 1),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20.0),
-              borderSide: BorderSide(
+              borderSide: const BorderSide(
                   color: Color.fromRGBO(29, 53, 87, 1))), //placeholder
           labelText: label,
-          prefixIcon: Icon(Icons.lock_open)),
+          prefixIcon: const Icon(Icons.lock_open)),
     );
   }
 
   _getButton(String label, color, BuildContext context, String route,
       {borderColor = Colors.white, textColor = Colors.white}) {
     return ElevatedButton(
-      onPressed: () => {Navigator.pushNamed(context, route)},
-      child: Text(
-        label,
-        style: TextStyle(fontSize: 20),
-      ),
+      onPressed: () => {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => RegisterStep2Page(
+                      teacher: _teacher,
+                    )))
+      },
       style: ElevatedButton.styleFrom(
         backgroundColor: color,
         foregroundColor: textColor,
-        minimumSize: Size(250, 50),
+        minimumSize: const Size(250, 50),
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
             side: BorderSide(color: borderColor, width: 1.0)),
+      ),
+      child: Text(
+        label,
+        style: const TextStyle(fontSize: 20),
       ),
     );
   }

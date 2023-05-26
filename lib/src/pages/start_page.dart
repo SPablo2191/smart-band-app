@@ -12,13 +12,13 @@ class StartPage extends StatelessWidget {
         child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
           _createImage(),
           Container(
-            child: _getButton('Iniciar Sesión', Color.fromRGBO(29, 53, 87, 1),
-                context, 'login'),
-            margin: EdgeInsets.only(bottom: 5),
+            child: _getButton('Iniciar Sesión',
+                const Color.fromRGBO(29, 53, 87, 1), context, 'login'),
+            margin: const EdgeInsets.only(bottom: 5),
           ),
           _getButton('Registrarse', Colors.white, context, 'register',
-              borderColor: Color.fromRGBO(29, 53, 87, 1),
-              textColor: Color.fromRGBO(29, 53, 87, 1))
+              borderColor: const Color.fromRGBO(29, 53, 87, 1),
+              textColor: const Color.fromRGBO(29, 53, 87, 1))
         ]),
       )),
     );
@@ -28,20 +28,20 @@ class StartPage extends StatelessWidget {
       {borderColor = Colors.white, textColor = Colors.white}) {
     return ElevatedButton(
       onPressed: () => {Navigator.pushNamed(context, route)},
-      child: Text(label),
       style: ElevatedButton.styleFrom(
         backgroundColor: color,
         foregroundColor: textColor,
-        minimumSize: Size(250, 40),
+        minimumSize: const Size(250, 40),
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
             side: BorderSide(color: borderColor, width: 1.0)),
       ),
+      child: Text(label),
     );
   }
 
   _createImage() {
-    return Expanded(
+    return const Expanded(
       child: Image(fit: BoxFit.contain, image: AssetImage('assets/logo.jpg')),
     );
   }

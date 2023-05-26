@@ -3,18 +3,16 @@ import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:smartband/src/models/school_model.dart';
 import 'package:smartband/src/providers/school_provider.dart';
 
-class RegisterStep2Page extends StatefulWidget {
-  const RegisterStep2Page({super.key});
+import '../../models/teacher_model.dart';
 
+class RegisterStep2Page extends StatefulWidget {
+  const RegisterStep2Page({super.key, this.teacher});
+  final Teacher? teacher;
   @override
   State<RegisterStep2Page> createState() => _RegisterStep2PageState();
 }
 
 class _RegisterStep2PageState extends State<RegisterStep2Page> {
-  String _name = '';
-  String _DNI = '';
-  String _lastName = '';
-  List<School> schools = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +26,7 @@ class _RegisterStep2PageState extends State<RegisterStep2Page> {
         backgroundColor: Colors.white,
       ),
       body: ListView(
-          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
           children: [
             Container(height: 50),
             _getDNI(),
@@ -47,10 +45,10 @@ class _RegisterStep2PageState extends State<RegisterStep2Page> {
             Container(
               height: 40,
             ),
-            _getButton('Siguiente', Color.fromRGBO(29, 53, 87, 1), context,
-                'register/step2'),
+            _getButton(
+                'Registrar', const Color.fromRGBO(29, 53, 87, 1), context, '/'),
             Container(
-                margin: EdgeInsets.only(top: 46.0),
+                margin: const EdgeInsets.only(top: 46.0),
                 decoration: const BoxDecoration(
                   border: Border(
                     top: BorderSide(
@@ -60,7 +58,7 @@ class _RegisterStep2PageState extends State<RegisterStep2Page> {
                   ),
                 ),
                 child: Container(
-                    margin: EdgeInsets.only(top: 10),
+                    margin: const EdgeInsets.only(top: 10),
                     child: Center(
                       child: GestureDetector(
                         onTap: () {
@@ -93,22 +91,23 @@ class _RegisterStep2PageState extends State<RegisterStep2Page> {
   _getDNI() {
     return TextField(
       onChanged: (value) => setState(() {
-        _DNI = value;
+        widget.teacher?.DNI = value;
       }),
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
         filled: true,
-        iconColor: Color.fromRGBO(29, 53, 87, 1),
-        labelStyle: TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
-        floatingLabelStyle: TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
-        hintStyle: TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
-        fillColor: Color.fromRGBO(221, 245, 246, 1),
+        iconColor: const Color.fromRGBO(29, 53, 87, 1),
+        labelStyle: const TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
+        floatingLabelStyle:
+            const TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
+        hintStyle: const TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
+        fillColor: const Color.fromRGBO(221, 245, 246, 1),
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20.0),
-            borderSide: BorderSide(color: Color.fromRGBO(29, 53, 87, 1))),
+            borderSide: const BorderSide(color: Color.fromRGBO(29, 53, 87, 1))),
         labelText: 'DNI',
         helperText: '9 caracteres maximo',
-        prefixIcon: Icon(Icons.perm_identity),
+        prefixIcon: const Icon(Icons.perm_identity),
       ),
     );
   }
@@ -116,21 +115,22 @@ class _RegisterStep2PageState extends State<RegisterStep2Page> {
   _getName() {
     return TextField(
       onChanged: (value) => setState(() {
-        _name = value;
+        widget.teacher?.name = value;
       }),
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
         filled: true,
-        iconColor: Color.fromRGBO(29, 53, 87, 1),
-        labelStyle: TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
-        floatingLabelStyle: TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
-        hintStyle: TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
-        fillColor: Color.fromRGBO(221, 245, 246, 1),
+        iconColor: const Color.fromRGBO(29, 53, 87, 1),
+        labelStyle: const TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
+        floatingLabelStyle:
+            const TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
+        hintStyle: const TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
+        fillColor: const Color.fromRGBO(221, 245, 246, 1),
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20.0),
-            borderSide: BorderSide(color: Color.fromRGBO(29, 53, 87, 1))),
+            borderSide: const BorderSide(color: Color.fromRGBO(29, 53, 87, 1))),
         labelText: 'Nombre',
-        prefixIcon: Icon(Icons.perm_identity),
+        prefixIcon: const Icon(Icons.perm_identity),
       ),
     );
   }
@@ -138,21 +138,22 @@ class _RegisterStep2PageState extends State<RegisterStep2Page> {
   _getLastName() {
     return TextField(
       onChanged: (value) => setState(() {
-        _lastName = value;
+        widget.teacher?.last_name = value;
       }),
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
         filled: true,
-        iconColor: Color.fromRGBO(29, 53, 87, 1),
-        labelStyle: TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
-        floatingLabelStyle: TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
-        hintStyle: TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
-        fillColor: Color.fromRGBO(221, 245, 246, 1),
+        iconColor: const Color.fromRGBO(29, 53, 87, 1),
+        labelStyle: const TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
+        floatingLabelStyle:
+            const TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
+        hintStyle: const TextStyle(color: Color.fromRGBO(29, 53, 87, 1)),
+        fillColor: const Color.fromRGBO(221, 245, 246, 1),
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20.0),
-            borderSide: BorderSide(color: Color.fromRGBO(29, 53, 87, 1))),
+            borderSide: const BorderSide(color: Color.fromRGBO(29, 53, 87, 1))),
         labelText: 'Apellido',
-        prefixIcon: Icon(Icons.perm_identity),
+        prefixIcon: const Icon(Icons.perm_identity),
       ),
     );
   }
@@ -160,18 +161,18 @@ class _RegisterStep2PageState extends State<RegisterStep2Page> {
   _getButton(String label, color, BuildContext context, String route,
       {borderColor = Colors.white, textColor = Colors.white}) {
     return ElevatedButton(
-      onPressed: () => {Navigator.pushNamed(context, route)},
-      child: Text(
-        label,
-        style: TextStyle(fontSize: 20),
-      ),
+      onPressed: () => {},
       style: ElevatedButton.styleFrom(
         backgroundColor: color,
         foregroundColor: textColor,
-        minimumSize: Size(250, 50),
+        minimumSize: const Size(250, 50),
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
             side: BorderSide(color: borderColor, width: 1.0)),
+      ),
+      child: Text(
+        label,
+        style: const TextStyle(fontSize: 20),
       ),
     );
   }
@@ -182,7 +183,7 @@ class _RegisterStep2PageState extends State<RegisterStep2Page> {
       future: schoolProvider.getSchools(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          final _items = snapshot.data
+          final items = snapshot.data
               ?.map((school) =>
                   MultiSelectItem<School?>(school, school.name ?? ''))
               .toList() as List<MultiSelectItem<Object?>>;
@@ -199,8 +200,8 @@ class _RegisterStep2PageState extends State<RegisterStep2Page> {
                 searchable: true,
                 listType: MultiSelectListType.CHIP,
                 dialogHeight: 160,
-                title: Text('Seleccionar'),
-                items: _items,
+                title: const Text('Seleccionar'),
+                items: items,
                 buttonIcon: const Icon(
                   Icons.home_filled,
                   color: Color.fromRGBO(29, 53, 87, 1),
@@ -213,7 +214,7 @@ class _RegisterStep2PageState extends State<RegisterStep2Page> {
                   ),
                 ),
                 onConfirm: (results) {
-                  schools = results as List<School>;
+                  widget.teacher?.schools = results as List<School>;
                 }),
           );
         } else if (snapshot.hasError) {

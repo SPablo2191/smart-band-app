@@ -7,9 +7,9 @@ import '../pages/register/register_step_1_page.dart';
 
 Map<String, WidgetBuilder> getRoutes() {
   return <String, WidgetBuilder>{
-    '/': (BuildContext context) => StartPage(),
-    'login': (BuildContext context) => LoginPage(),
-    'register': (BuildContext context) => RegisterStep1Page(),
-    'register/step2':(BuildContext context) => RegisterStep2Page(),
+    '/': (BuildContext context) => const StartPage(),
+    'login': (BuildContext context) => const LoginPage(),
+    'register': (BuildContext context) => const RegisterStep1Page(),
+    'register/step2': (BuildContext context) => const RegisterStep2Page(),
   };
 }

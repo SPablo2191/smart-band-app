@@ -19,8 +19,8 @@ class Teacher {
     required this.email,
     required this.password,
     required this.schools,
-    required this.status,
-    required this.registerDate,
+    this.status,
+    this.registerDate,
   });
   Teacher.fromJsonMap(Map<String, dynamic> json) {
     id = json['id'];

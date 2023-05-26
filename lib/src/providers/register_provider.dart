@@ -19,7 +19,6 @@ class RegisterProvider {
       final response = Teacher.fromJsonMap(decodedData);
       return response;
     } catch (e) {
-      print(e);
       // Hubo un error al realizar la solicitud HTTP
       return Teacher();
     }

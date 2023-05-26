@@ -244,11 +244,9 @@ class _RegisterStep2PageState extends State<RegisterStep2Page> {
   _register() {
     widget.teacher?.schools = schoolsSelected;
     if (!widget.teacher?.isValid()) {
-      print('hola');
       return;
     }
     RegisterProvider registerProvider = RegisterProvider();
-    print('llegue a register => ${widget.teacher?.schools}');
     Teacher aux = widget.teacher ?? Teacher();
     registerProvider.register(aux);
     Navigator.pushNamed(context, '/');

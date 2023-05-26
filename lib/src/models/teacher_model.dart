@@ -43,12 +43,10 @@ class Teacher {
   }
 
   Map<String, dynamic> getMap() {
-    print(schools);
     List<Map<String, dynamic>> auxSchools = [];
     for (var school in schools!) {
       auxSchools.add(school.getMap());
     }
-    print(auxSchools);
     return {
       'name': name,
       'last_name': last_name,

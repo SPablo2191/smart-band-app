@@ -9,7 +9,8 @@ class SchoolProvider {
   final String route = getApiRoutes()['schools'] ?? '';
 
   Future<List<School>> getSchools() async {
-    final url = Uri.https(_url, route);
+    // final url = Uri.https(_url, route);
+    final url = Uri.parse('${_url}${route}');
     final resp = await http.get(url);
     final decodedData = json.decode(resp.body);
     final movies = Schools.fromJsonList(decodedData);

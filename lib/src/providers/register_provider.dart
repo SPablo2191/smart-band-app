@@ -10,13 +10,12 @@ class RegisterProvider {
 
   Future<Teacher> register(Teacher teacher) async {
     try {
-      final url = Uri.https(_url, route);
-      print('llegue a url => ${url} teacher => ${teacher}');
+      // final url = Uri.https(_url, route);
+      final url = Uri.parse('${_url}${route}');
       String body = jsonEncode(teacher.getMap());
-      print(body);
-      final resp = await http.post(url, body: jsonEncode(teacher.getMap()));
+      final resp = await http.post(url,
+          headers: {'Content-Type': 'application/json'}, body: body);
       final decodedData = json.decode(resp.body);
-      print('respuesta => ${decodedData}');
       final response = Teacher.fromJsonMap(decodedData);
       return response;
     } catch (e) {

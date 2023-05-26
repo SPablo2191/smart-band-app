@@ -251,5 +251,6 @@ class _RegisterStep2PageState extends State<RegisterStep2Page> {
     print('llegue a register => ${widget.teacher?.schools}');
     Teacher aux = widget.teacher ?? Teacher();
     registerProvider.register(aux);
+    Navigator.pushNamed(context, '/');
   }
 }

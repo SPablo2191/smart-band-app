@@ -10,14 +10,7 @@ class RegisterStep1Page extends StatefulWidget {
 }
 
 class _RegisterStep1PageState extends State<RegisterStep1Page> {
-  final Teacher _teacher = Teacher(
-      id: 0,
-      name: '',
-      last_name: '',
-      DNI: '',
-      email: '',
-      password: '',
-      schools: []);
+  final Teacher _teacher = Teacher();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

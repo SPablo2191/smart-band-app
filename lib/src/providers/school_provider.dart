@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 import 'package:smartband/src/core/consts/api_route_map.dart';
 import 'package:smartband/src/models/school_model.dart';
 
-
 class SchoolProvider {
   final String _url = dotenv.env['API_URL'] ?? 'API_URL not found';
   final String route = getApiRoutes()['schools'] ?? '';

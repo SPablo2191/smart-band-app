@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:smartband/src/models/school_model.dart';
+import 'package:smartband/src/providers/register_provider.dart';
 import 'package:smartband/src/providers/school_provider.dart';
 
 import '../../models/teacher_model.dart';
@@ -13,6 +14,7 @@ class RegisterStep2Page extends StatefulWidget {
 }
 
 class _RegisterStep2PageState extends State<RegisterStep2Page> {
+  List<School> schoolsSelected = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -161,7 +163,7 @@ class _RegisterStep2PageState extends State<RegisterStep2Page> {
   _getButton(String label, color, BuildContext context, String route,
       {borderColor = Colors.white, textColor = Colors.white}) {
     return ElevatedButton(
-      onPressed: () => {},
+      onPressed: () => _register(),
       style: ElevatedButton.styleFrom(
         backgroundColor: color,
         foregroundColor: textColor,
@@ -214,7 +216,12 @@ class _RegisterStep2PageState extends State<RegisterStep2Page> {
                   ),
                 ),
                 onConfirm: (results) {
-                  widget.teacher?.schools = results as List<School>;
+                  // List<School> options = [];
+                  // for (dynamic element in results) {
+                  //   School aux = School(name: element?.name, id: element?.id);
+                  //   options.add(element);
+                  // }
+                  schoolsSelected = results as List<School>;
                 }),
           );
         } else if (snapshot.hasError) {
@@ -232,5 +239,15 @@ class _RegisterStep2PageState extends State<RegisterStep2Page> {
         );
       },
     );
+  }
+
+  _register() {
+    widget.teacher?.schools = schoolsSelected;
+    if (!widget.teacher?.isValid()) {
+      return;
+    }
+    RegisterProvider registerProvider = RegisterProvider();
+    Teacher aux = widget.teacher ?? Teacher();
+    registerProvider.register(aux);
   }
 }

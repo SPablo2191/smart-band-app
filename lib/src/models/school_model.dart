@@ -5,10 +5,10 @@ class School {
   DateTime? registerDate;
 
   School({
-    required this.id,
-    required this.name,
-    required this.status,
-    required this.registerDate,
+    this.id,
+    this.name,
+    this.status,
+    this.registerDate,
   });
   School.fromJsonMap(Map<String, dynamic> json) {
     id = json['id'];

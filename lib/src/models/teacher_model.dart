@@ -12,13 +12,13 @@ class Teacher {
   DateTime? registerDate;
 
   Teacher({
-    required this.id,
-    required this.name,
-    required this.last_name,
-    required this.DNI,
-    required this.email,
-    required this.password,
-    required this.schools,
+    this.id,
+    this.name,
+    this.last_name,
+    this.DNI,
+    this.email,
+    this.password,
+    this.schools,
     this.status,
     this.registerDate,
   });
@@ -33,4 +33,15 @@ class Teacher {
     status = json['status'];
     registerDate = json['registerDate'];
   }
+  isValid() {
+    print(
+        '${name == null}, ${last_name == null}, ${DNI == null}, ${email == null},${password == null}, ${schools == null}');
+    return !(name == null &&
+        last_name == null &&
+        DNI == null &&
+        email == null &&
+        password == null &&
+        schools == null);
+  }
+
 }

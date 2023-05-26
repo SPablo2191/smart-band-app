@@ -3,7 +3,7 @@ import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:smartband/src/models/school_model.dart';
 import 'package:smartband/src/providers/register_provider.dart';
 import 'package:smartband/src/providers/school_provider.dart';
-
+import 'package:fluttertoast/fluttertoast.dart';
 import '../../models/teacher_model.dart';
 
 class RegisterStep2Page extends StatefulWidget {
@@ -249,6 +249,15 @@ class _RegisterStep2PageState extends State<RegisterStep2Page> {
     RegisterProvider registerProvider = RegisterProvider();
     Teacher aux = widget.teacher ?? Teacher();
     registerProvider.register(aux);
-    Navigator.pushNamed(context, '/');
+    Fluttertoast.showToast(
+        msg: "¡Usuario Registrado con exito!",
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 2,
+        backgroundColor: const Color.fromRGBO(29, 53, 87, 1),
+        textColor: const Color.fromRGBO(221, 245, 246, 1),
+        fontSize: 16.0);
+    Future.delayed(
+        Duration(seconds: 2), () => {Navigator.pushNamed(context, '/')});
   }
 }

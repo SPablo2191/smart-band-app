@@ -216,12 +216,12 @@ class _RegisterStep2PageState extends State<RegisterStep2Page> {
                   ),
                 ),
                 onConfirm: (results) {
-                  // List<School> options = [];
-                  // for (dynamic element in results) {
-                  //   School aux = School(name: element?.name, id: element?.id);
-                  //   options.add(element);
-                  // }
-                  schoolsSelected = results as List<School>;
+                  List<School> options = [];
+                  for (dynamic element in results) {
+                    School aux = School(name: element?.name, id: element?.id);
+                    options.add(element);
+                  }
+                  schoolsSelected = options;
                 }),
           );
         } else if (snapshot.hasError) {
@@ -244,9 +244,11 @@ class _RegisterStep2PageState extends State<RegisterStep2Page> {
   _register() {
     widget.teacher?.schools = schoolsSelected;
     if (!widget.teacher?.isValid()) {
+      print('hola');
       return;
     }
     RegisterProvider registerProvider = RegisterProvider();
+    print('llegue a register => ${widget.teacher?.schools}');
     Teacher aux = widget.teacher ?? Teacher();
     registerProvider.register(aux);
   }

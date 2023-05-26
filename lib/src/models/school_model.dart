@@ -16,6 +16,12 @@ class School {
     status = json['status'];
     registerDate = json['registerDate'];
   }
+  Map<String, dynamic> getMap() {
+    return {
+      'name': name,
+      'id': id,
+    };
+  }
 }
 
 class Schools {

@@ -9,15 +9,18 @@ class RegisterProvider {
   final String route = getApiRoutes()['register'] ?? '';
 
   Future<Teacher> register(Teacher teacher) async {
-    String teacherJson = json.encode(teacher);
     try {
       final url = Uri.https(_url, route);
-      final resp = await http.post(url,
-          headers: {'Content-Type': 'application/json'}, body: teacherJson);
+      print('llegue a url => ${url} teacher => ${teacher}');
+      String body = jsonEncode(teacher.getMap());
+      print(body);
+      final resp = await http.post(url, body: jsonEncode(teacher.getMap()));
       final decodedData = json.decode(resp.body);
+      print('respuesta => ${decodedData}');
       final response = Teacher.fromJsonMap(decodedData);
       return response;
     } catch (e) {
+      print(e);
       // Hubo un error al realizar la solicitud HTTP
       return Teacher();
     }

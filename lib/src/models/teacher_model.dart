@@ -34,8 +34,6 @@ class Teacher {
     registerDate = json['registerDate'];
   }
   isValid() {
-    print(
-        '${name == null}, ${last_name == null}, ${DNI == null}, ${email == null},${password == null}, ${schools == null}');
     return !(name == null &&
         last_name == null &&
         DNI == null &&
@@ -44,4 +42,20 @@ class Teacher {
         schools == null);
   }
 
+  Map<String, dynamic> getMap() {
+    print(schools);
+    List<Map<String, dynamic>> auxSchools = [];
+    for (var school in schools!) {
+      auxSchools.add(school.getMap());
+    }
+    print(auxSchools);
+    return {
+      'name': name,
+      'last_name': last_name,
+      'DNI': DNI,
+      'email': email,
+      'password': password,
+      'schools': auxSchools,
+    };
+  }
 }

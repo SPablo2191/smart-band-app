@@ -9,7 +9,8 @@ class AuthProvider {
 
   Future<Teacher> register(Teacher teacher) async {
     try {
-      final url = Uri.parse('${_url}${getApiRoutes()['register']}');
+      final endpoint = getApiRoutes()['register'];
+      final url = Uri.parse('$_url$endpoint');
       String body = jsonEncode(teacher.getMap());
       final resp = await http.post(url,
           headers: {'Content-Type': 'application/json'}, body: body);
@@ -22,18 +23,22 @@ class AuthProvider {
     }
   }
 
-  login(Teacher teacher) async {
+  login(String? email, String? password) async {
     try {
-      final url = Uri.parse('${_url}${getApiRoutes()['login']}');
-      String body = jsonEncode(teacher.getMap());
+      final endpoint = getApiRoutes()['login'];
+      final url = Uri.parse('$_url$endpoint');
+      print(url);
+      Map<String, String?> body = {'email': email, 'password': password};
       final resp = await http.post(url,
-          headers: {'Content-Type': 'application/json'}, body: body);
+          headers: {'Content-Type': 'application/json'},
+          body: jsonEncode(body));
       final decodedData = json.decode(resp.body);
-      print(decodedData);
+      print(decodedData.access_token);
       final response = Teacher.fromJsonMap(decodedData);
       return response;
     } catch (e) {
       // Hubo un error al realizar la solicitud HTTP
+      print(e);
       return Teacher();
     }
   }

@@ -150,10 +150,9 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _authenticate() {
-    print(_teacher.email);
     AuthProvider authProvider = AuthProvider();
-    authProvider.login(_teacher);
+    authProvider.login(_teacher.email,_teacher.password);
     Future.delayed(
-        Duration(seconds: 2), () => {Navigator.pushNamed(context, '/')});
+        Duration(seconds: 2), () => {Navigator.pushNamed(context, 'home')});
   }
 }

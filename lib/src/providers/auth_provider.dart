@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:smartband/src/core/consts/api_route_map.dart';
 import 'package:smartband/src/models/teacher_model.dart';
 
-class RegisterProvider {
+class AuthProvider {
   final String _url = dotenv.env['API_URL'] ?? 'API_URL not found';
   final String route = getApiRoutes()['register'] ?? '';
 
@@ -23,4 +23,5 @@ class RegisterProvider {
       return Teacher();
     }
   }
+  
 }

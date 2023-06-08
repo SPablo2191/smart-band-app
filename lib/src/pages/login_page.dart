@@ -147,5 +147,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  _authenticate() {}
+  _authenticate() {
+    print(_teacher.email);
+  }
 }

@@ -14,7 +14,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-        children: [_getHomeTitle(), _getMainFunctions()],
+        children: [_getHomeTitle(), _getMainFunctions(), _getTests()],
       ),
     );
   }
@@ -105,6 +105,21 @@ class _HomePageState extends State<HomePage> {
                 buttonLabel: 'Historial\nEvaluaciones'),
           ],
         ),
+      ),
+    );
+  }
+
+  _getTests() {
+    return Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Evaluaciones',
+            style: TextStyle(color: colorPrimary, fontSize: 20),
+          ),
+        ],
       ),
     );
   }

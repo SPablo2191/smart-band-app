@@ -1,8 +1,8 @@
 Map<String, String> getApiRoutes() {
   return <String, String>{
     'schools': '/api/schools',
-    'login': '/api/login',
-    'register': '/api/register',
+    'login': '/api/auth/login',
+    'register': '/api/auth/register',
     'teachers':'/api/teachers',
   };
 }

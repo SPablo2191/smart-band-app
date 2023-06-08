@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../models/teacher_model.dart';
+import '../providers/auth_provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -149,5 +151,9 @@ class _LoginPageState extends State<LoginPage> {
 
   _authenticate() {
     print(_teacher.email);
+    AuthProvider authProvider = AuthProvider();
+    authProvider.login(_teacher);
+    Future.delayed(
+        Duration(seconds: 2), () => {Navigator.pushNamed(context, '/')});
   }
 }

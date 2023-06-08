@@ -6,12 +6,10 @@ import 'package:smartband/src/models/teacher_model.dart';
 
 class AuthProvider {
   final String _url = dotenv.env['API_URL'] ?? 'API_URL not found';
-  final String route = getApiRoutes()['register'] ?? '';
 
   Future<Teacher> register(Teacher teacher) async {
     try {
-      // final url = Uri.https(_url, route);
-      final url = Uri.parse('${_url}${route}');
+      final url = Uri.parse('${_url}${getApiRoutes()['register']}');
       String body = jsonEncode(teacher.getMap());
       final resp = await http.post(url,
           headers: {'Content-Type': 'application/json'}, body: body);
@@ -23,5 +21,20 @@ class AuthProvider {
       return Teacher();
     }
   }
-  
+
+  login(Teacher teacher) async {
+    try {
+      final url = Uri.parse('${_url}${getApiRoutes()['login']}');
+      String body = jsonEncode(teacher.getMap());
+      final resp = await http.post(url,
+          headers: {'Content-Type': 'application/json'}, body: body);
+      final decodedData = json.decode(resp.body);
+      print(decodedData);
+      final response = Teacher.fromJsonMap(decodedData);
+      return response;
+    } catch (e) {
+      // Hubo un error al realizar la solicitud HTTP
+      return Teacher();
+    }
+  }
 }

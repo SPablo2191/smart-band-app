@@ -13,6 +13,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final Teacher _teacher = Teacher();
+  bool _isLoading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -133,26 +134,48 @@ class _LoginPageState extends State<LoginPage> {
   _getButton(String label, color, BuildContext context, String route,
       {borderColor = Colors.white, textColor = Colors.white}) {
     return ElevatedButton(
-      onPressed: () => _authenticate(),
+      onPressed: () {
+        setState(() {
+          _isLoading = true; // Activa el indicador de carga
+        });
+        _authenticate().then((success) {
+          setState(() {
+            _isLoading = false; // Desactiva el indicador de carga
+          });
+          // Realiza las acciones adicionales según el resultado de la autenticación (success)
+        });
+      },
       style: ElevatedButton.styleFrom(
         backgroundColor: color,
         foregroundColor: textColor,
         minimumSize: const Size(250, 50),
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-            side: BorderSide(color: borderColor, width: 1.0)),
+          borderRadius: BorderRadius.circular(20),
+          side: BorderSide(color: borderColor, width: 1.0),
+        ),
       ),
-      child: Text(
-        label,
-        style: const TextStyle(fontSize: 20),
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          if (!_isLoading) // Muestra el texto del botón solo si no está en estado de carga
+            Text(
+              label,
+              style: const TextStyle(fontSize: 20),
+            ),
+          if (_isLoading) // Muestra el indicador de carga solo si está en estado de carga
+            CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+            ),
+        ],
       ),
     );
   }
 
-  _authenticate() {
+  _authenticate() async {
     AuthProvider authProvider = AuthProvider();
-    authProvider.login(_teacher.email,_teacher.password);
-    Future.delayed(
-        Duration(seconds: 2), () => {Navigator.pushNamed(context, 'home')});
+    final band = await authProvider.login(_teacher.email, _teacher.password);
+    if (band) {
+      Navigator.pushNamed(context, 'home');
+    }
   }
 }

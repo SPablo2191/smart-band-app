@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:smartband/src/models/school_model.dart';
-import 'package:smartband/src/providers/register_provider.dart';
+import 'package:smartband/src/providers/auth_provider.dart';
 import 'package:smartband/src/providers/school_provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../models/teacher_model.dart';
@@ -246,7 +246,7 @@ class _RegisterStep2PageState extends State<RegisterStep2Page> {
     if (!widget.teacher?.isValid()) {
       return;
     }
-    RegisterProvider registerProvider = RegisterProvider();
+    AuthProvider registerProvider = AuthProvider();
     Teacher aux = widget.teacher ?? Teacher();
     registerProvider.register(aux);
     Fluttertoast.showToast(

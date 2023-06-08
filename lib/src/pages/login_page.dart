@@ -176,6 +176,15 @@ class _LoginPageState extends State<LoginPage> {
     final band = await authProvider.login(_teacher.email, _teacher.password);
     if (band) {
       Navigator.pushNamed(context, 'home');
+    } else {
+      Fluttertoast.showToast(
+          msg: "Correo Electronico u contraseña invalido. Pruebe nuevamente",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 2,
+          backgroundColor: const Color.fromRGBO(29, 53, 87, 1),
+          textColor: const Color.fromRGBO(221, 245, 246, 1),
+          fontSize: 16.0);
     }
   }
 }

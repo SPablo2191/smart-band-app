@@ -24,30 +24,32 @@ class AuthProvider {
     }
   }
 
-Future<bool> login(String? email, String? password) async {
-  try {
-    final endpoint = getApiRoutes()['login'];
-    final url = Uri.parse('$_url$endpoint');
-    Map<String, String> body = {'email': email ?? '', 'password': password ?? ''};
-    final resp = await http.post(
-      url,
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode(body),
-    );
-    
-    if (resp.statusCode == 200) {
-      final decodedData = json.decode(resp.body);
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setString('accessToken', decodedData['access_token']);
-      return true;
-    } else {
-      print('Error: ${resp.statusCode}');
+  Future<bool> login(String? email, String? password) async {
+    try {
+      final endpoint = getApiRoutes()['login'];
+      final url = Uri.parse('$_url$endpoint');
+      Map<String, String> body = {
+        'email': email ?? '',
+        'password': password ?? ''
+      };
+      final resp = await http.post(
+        url,
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(body),
+      );
+
+      if (resp.statusCode == 200) {
+        final decodedData = json.decode(resp.body);
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString('accessToken', decodedData['access_token']);
+        return true;
+      } else {
+        print('Error: ${resp.statusCode}');
+        return false;
+      }
+    } catch (e) {
+      // Hubo un error al realizar la solicitud HTTP
       return false;
     }
-  } catch (e) {
-    // Hubo un error al realizar la solicitud HTTP
-    print('Exception: $e');
-    return false;
   }
-}
 }

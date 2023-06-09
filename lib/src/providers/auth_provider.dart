@@ -42,9 +42,9 @@ class AuthProvider {
         final decodedData = json.decode(resp.body);
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString('accessToken', decodedData['access_token']);
+        await prefs.setString('userId', decodedData['user_id']);
         return true;
       } else {
-        print('Error: ${resp.statusCode}');
         return false;
       }
     } catch (e) {

@@ -121,7 +121,10 @@ class _HomePageState extends State<HomePage> {
             'Evaluaciones',
             style: TextStyle(color: colorPrimary, fontSize: 20),
           ),
-          TestCard()
+          TestCard(),
+          TestCard(),
+          TestCard(),
+          TestCard(),
         ],
       ),
     );

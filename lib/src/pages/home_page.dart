@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smartband/src/core/consts/colors.dart';
+import 'package:smartband/src/widgets/bottom_navigation_bar_widget.dart';
 import 'package:smartband/src/widgets/home_button_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,10 +14,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        children: [_getHomeTitle(), _getMainFunctions(), _getTests()],
-      ),
-    );
+        body: ListView(
+          children: [_getHomeTitle(), _getMainFunctions(), _getTests()],
+        ),
+        bottomNavigationBar: CustomBottomNavigationBar());
   }
 
   _getHomeTitle() {

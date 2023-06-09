@@ -41,14 +41,16 @@ class AuthProvider {
       if (resp.statusCode == 200) {
         final decodedData = json.decode(resp.body);
         SharedPreferences prefs = await SharedPreferences.getInstance();
-        await prefs.setString('accessToken', decodedData['access_token']);
-        await prefs.setString('userId', decodedData['user_id']);
+        prefs.setString('accessToken', decodedData['access_token']);
+        prefs.setInt('userId', decodedData['user_id']);
         return true;
       } else {
+        print('Error: ${resp.statusCode}');
         return false;
       }
     } catch (e) {
       // Hubo un error al realizar la solicitud HTTP
+      print('Error: $e');
       return false;
     }
   }

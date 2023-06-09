@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smartband/src/core/consts/colors.dart';
 import 'package:smartband/src/widgets/bottom_navigation_bar_widget.dart';
 import 'package:smartband/src/widgets/home_button_widget.dart';
+import 'package:smartband/src/widgets/test_card_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -120,6 +121,7 @@ class _HomePageState extends State<HomePage> {
             'Evaluaciones',
             style: TextStyle(color: colorPrimary, fontSize: 20),
           ),
+          TestCard()
         ],
       ),
     );

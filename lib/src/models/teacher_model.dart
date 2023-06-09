@@ -7,7 +7,7 @@ class Teacher {
   String? last_name;
   String? password;
   String? email;
-  List<School>? schools;
+  List<dynamic>? schools;
   bool? status;
   DateTime? registerDate;
 

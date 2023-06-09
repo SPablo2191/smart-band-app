@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smartband/src/core/consts/colors.dart';
+import 'package:smartband/src/providers/teacher_provider.dart';
 import 'package:smartband/src/widgets/bottom_navigation_bar_widget.dart';
 import 'package:smartband/src/widgets/home_button_widget.dart';
 import 'package:smartband/src/widgets/test_card_widget.dart';
+
+import '../models/teacher_model.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,59 +16,83 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String? _accessToken = '';
+  Future<Teacher>? _teacher;
+  int? _userId = 0;
+  @override
+  void initState() {
+    super.initState();
+    _loadData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: ListView(
           children: [_getHomeTitle(), _getMainFunctions(), _getTests()],
         ),
-        bottomNavigationBar: CustomBottomNavigationBar());
+        bottomNavigationBar: const CustomBottomNavigationBar());
   }
 
   _getHomeTitle() {
-    return Padding(
-      padding: const EdgeInsets.all(12.0),
-      child: Row(
-        children: [
-          RichText(
-            text: const TextSpan(
-              text: '¡Hola\n',
-              style: TextStyle(
-                color: Color.fromRGBO(29, 53, 87, 1),
-                fontSize: 40,
-              ),
+    return FutureBuilder<Teacher>(
+      future: _teacher,
+      builder: (BuildContext context, AsyncSnapshot<Teacher> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return CircularProgressIndicator();
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else if (snapshot.hasData) {
+          final teacher = snapshot.data!;
+          return Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Row(
               children: [
-                TextSpan(
-                  text: 'Juan Perez!',
-                  style: TextStyle(
+                Expanded(
+                  child: RichText(
+                    text: TextSpan(
+                      text: '¡Hola\n',
+                      style: const TextStyle(
+                        color: Color.fromRGBO(29, 53, 87, 1),
+                        fontSize: 40,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: '${teacher.name}!',
+                          style: const TextStyle(
+                            color: Color.fromRGBO(29, 53, 87, 1),
+                            fontSize: 40,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                    width: 20), // Espacio adicional entre el texto y el botón
+                Container(
+                  width: 70,
+                  height: 70,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
                     color: Color.fromRGBO(29, 53, 87, 1),
-                    fontSize: 40,
+                  ),
+                  child: IconButton(
+                    onPressed: () {},
+                    iconSize: 40,
+                    icon: const Icon(
+                      Icons.person,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ],
             ),
-          ),
-          const SizedBox(width: 44),
-          Container(
-            width: 70, // Ajusta el ancho del botón según tu preferencia
-            height: 70, // Ajusta la altura del botón según tu preferencia
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: Color.fromRGBO(29, 53, 87, 1),
-            ),
-            child: IconButton(
-              onPressed: () {
-                // Acción al presionar el botón redondo
-              },
-              iconSize: 40, // Ajusta el tamaño del ícono según tu preferencia
-              icon: const Icon(
-                Icons.person,
-                color: Colors.white,
-              ),
-            ),
-          ),
-        ],
-      ),
+          );
+        } else {
+          return Text('No hay datos disponibles ${snapshot.data}');
+        }
+      },
     );
   }
 
@@ -129,5 +156,15 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
+  }
+
+  void _loadData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _accessToken = prefs.getString('accessToken');
+    _userId = prefs.getInt('userId');
+    TeacherProvider teacherProvider = TeacherProvider();
+    setState(() {
+      _teacher = teacherProvider.getTeacherById(_userId, _accessToken);
+    });
   }
 }

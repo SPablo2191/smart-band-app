@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:smartband/src/core/consts/colors.dart';
 
+import '../models/test_model.dart';
+
 class TestCard extends StatelessWidget {
-  const TestCard({super.key});
+  final Test test;
+  const TestCard({required this.test, super.key});
 
   @override
   Widget build(BuildContext context) {

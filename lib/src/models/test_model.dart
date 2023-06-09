@@ -1,6 +1,6 @@
 import 'package:smartband/src/models/school_model.dart';
 
-class Teacher {
+class Test {
   int? id;
   String? DNI;
   String? name;
@@ -12,7 +12,7 @@ class Teacher {
   bool? status;
   DateTime? registerDate;
 
-  Teacher(
+  Test(
       {this.id,
       this.name,
       this.last_name,
@@ -23,7 +23,7 @@ class Teacher {
       this.status,
       this.registerDate,
       this.tests});
-  Teacher.fromJsonMap(Map<String, dynamic> json) {
+  Test.fromJsonMap(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     last_name = json['last_name'];

@@ -18,7 +18,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
       ),
       height: 50,
       child: InkWell(
-        onTap: () => {},
+        onTap: () => {Navigator.pushNamed(context, 'home')},
         child: Padding(
           padding: EdgeInsets.only(top: 8.0),
           child: Column(

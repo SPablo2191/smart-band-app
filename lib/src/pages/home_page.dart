@@ -139,22 +139,71 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  // _getTests() {
+  //   return Padding(
+  //     padding: const EdgeInsets.all(12.0),
+  //     child: Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         Text(
+  //           'Evaluaciones',
+  //           style: TextStyle(color: colorPrimary, fontSize: 20),
+  //         ),
+  //         TestCard(),
+  //         TestCard(),
+  //         TestCard(),
+  //         TestCard(),
+  //       ],
+  //     ),
+  //   );
+  // }
+
   _getTests() {
-    return Padding(
-      padding: const EdgeInsets.all(12.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Evaluaciones',
-            style: TextStyle(color: colorPrimary, fontSize: 20),
-          ),
-          TestCard(),
-          TestCard(),
-          TestCard(),
-          TestCard(),
-        ],
-      ),
+    return FutureBuilder<Teacher>(
+      future: _teacher,
+      builder: (BuildContext context, AsyncSnapshot<Teacher> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return CircularProgressIndicator();
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else if (snapshot.hasData) {
+          final teacher = snapshot.data!;
+          return Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Evaluaciones',
+                  style: TextStyle(color: colorPrimary, fontSize: 20),
+                ),
+                if (teacher.tests != null && teacher.tests!.isNotEmpty)
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: teacher.tests!.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final test = teacher.tests![index];
+                      return TestCard(test: test);
+                    },
+                  )
+                else
+                  Container(
+                    alignment: Alignment.center,
+                    height: 100,
+                    child: Center(
+                      child: Text(
+                        'No hay evaluaciones disponibles',
+                        style: TextStyle(color: colorPrimary, fontSize: 20),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          );
+        } else {
+          return Text('No hay datos disponibles ${snapshot.data}');
+        }
+      },
     );
   }
 

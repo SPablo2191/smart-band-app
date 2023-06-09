@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smartband/src/core/consts/colors.dart';
 import 'package:smartband/src/widgets/bottom_navigation_bar_widget.dart';
 import 'package:smartband/src/widgets/home_button_widget.dart';

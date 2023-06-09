@@ -6,6 +6,7 @@ class HomeButton extends StatelessWidget {
   final IconData buttonIcon;
   final Color buttonLabelColor;
   final String buttonLabel;
+  final String path;
 
   const HomeButton(
       {required this.buttonColor,
@@ -13,6 +14,7 @@ class HomeButton extends StatelessWidget {
       required this.buttonIcon,
       required this.buttonLabel,
       required this.buttonLabelColor,
+      required this.path,
       super.key});
 
   @override
@@ -28,7 +30,7 @@ class HomeButton extends StatelessWidget {
           ),
           child: IconButton(
             onPressed: () {
-              // Acción al presionar el botón
+              Navigator.pushNamed(context, path);
             },
             iconSize: 30,
             icon: Icon(

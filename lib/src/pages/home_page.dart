@@ -78,7 +78,9 @@ class _HomePageState extends State<HomePage> {
                     color: Color.fromRGBO(29, 53, 87, 1),
                   ),
                   child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, 'profile');
+                    },
                     iconSize: 40,
                     icon: const Icon(
                       Icons.person,
@@ -120,18 +122,21 @@ class _HomePageState extends State<HomePage> {
                 buttonIconColor: colorPrimary,
                 buttonIcon: Icons.people_alt_outlined,
                 buttonLabelColor: colorPrimary,
+                path: 'promotion',
                 buttonLabel: 'Ver\nPromociones'),
             HomeButton(
                 buttonColor: colorSecondary,
                 buttonIconColor: colorPrimary,
                 buttonIcon: Icons.add_chart_rounded,
                 buttonLabelColor: colorPrimary,
+                path: '',
                 buttonLabel: 'Crear\nEvaluaciones'),
             HomeButton(
                 buttonColor: colorSecondary,
                 buttonIconColor: colorPrimary,
                 buttonIcon: Icons.file_copy_outlined,
                 buttonLabelColor: colorPrimary,
+                path: '',
                 buttonLabel: 'Historial\nEvaluaciones'),
           ],
         ),

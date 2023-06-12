@@ -4,34 +4,41 @@ import 'package:smartband/src/core/consts/colors.dart';
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool showBackButton;
+  final bool centerTitle;
 
   @override
   final Size preferredSize;
 
-  const CustomAppBar(
-      {required this.title, this.showBackButton = false, Key? key})
-      : preferredSize = const Size.fromHeight(kToolbarHeight),
+  const CustomAppBar({
+    required this.title,
+    this.showBackButton = false,
+    this.centerTitle = true,
+    Key? key,
+  })  : preferredSize = const Size.fromHeight(kToolbarHeight),
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
-      leading: showBackButton
-          ? IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            )
-          : null,
-      title: Center(
-        child: Text(
-          title,
-          style: TextStyle(color: colorPrimary, fontSize: 30),
-        ),
+      title: Text(
+        title,
+        style: TextStyle(color: colorPrimary, fontSize: 30),
       ),
       backgroundColor: Colors.white,
+      centerTitle: centerTitle,
+      actions: [
+        if (showBackButton)
+          IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: colorPrimary,
+            ),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+      ],
     );
   }
 }

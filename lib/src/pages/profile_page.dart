@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/appbar_widget.dart';
+import '../widgets/profile_picture_widget.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -18,13 +19,16 @@ class _ProfilePageState extends State<ProfilePage> {
         showBackButton: true,
         centerTitle: false,
       ),
-      body: ListView(
-        children: [_getProfilePicture()],
+      body: Padding(
+        padding: const EdgeInsets.only(top: 20.0),
+        child: ListView(
+          children: [_getProfilePicture(),],
+        ),
       ),
     );
   }
 
   _getProfilePicture() {
-    return Icon(Icons.person);
+    return PersonIcon(icon: Icons.person, size: 150);
   }
 }

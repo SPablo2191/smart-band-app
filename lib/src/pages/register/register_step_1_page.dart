@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smartband/src/models/teacher_model.dart';
 import 'package:smartband/src/pages/register/register_step_2_page.dart';
+import 'package:smartband/src/widgets/appbar_widget.dart';
 
 class RegisterStep1Page extends StatefulWidget {
   const RegisterStep1Page({super.key});
@@ -14,15 +15,7 @@ class _RegisterStep1PageState extends State<RegisterStep1Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: const Center(
-            child: Text(
-          'Registrarse',
-          style: TextStyle(color: Color.fromRGBO(29, 53, 87, 1), fontSize: 30),
-        )),
-        backgroundColor: Colors.white,
-      ),
+      appBar: CustomAppBar(title: 'Registrarse'),
       body: ListView(
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
           children: [

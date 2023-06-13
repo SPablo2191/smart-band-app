@@ -1,5 +1,3 @@
-
-
 class Test {
   int? id;
   String? DNI;

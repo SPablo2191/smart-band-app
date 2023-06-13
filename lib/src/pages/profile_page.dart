@@ -94,7 +94,11 @@ class _ProfilePageState extends State<ProfilePage> {
                       ],
                     ),
                   ),
-                  _getSchools()
+                  _getSchools(),
+                  Container(
+                    height: 40,
+                  ),
+                  _getButton('Cerrar Sesión', colorPrimary, context),
                 ],
               ),
             ),
@@ -251,6 +255,25 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
+  _getButton(String label, color, BuildContext context,
+      {borderColor = Colors.white, textColor = Colors.white}) {
+    return ElevatedButton(
+      onPressed: () => _logout(context),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: color,
+        foregroundColor: textColor,
+        minimumSize: const Size(250, 50),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+            side: BorderSide(color: borderColor, width: 1.0)),
+      ),
+      child: Text(
+        label,
+        style: const TextStyle(fontSize: 20),
+      ),
+    );
+  }
+
   void _loadData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     _accessToken = prefs.getString('accessToken');
@@ -258,6 +281,14 @@ class _ProfilePageState extends State<ProfilePage> {
     TeacherProvider teacherProvider = TeacherProvider();
     setState(() {
       _teacher = teacherProvider.getTeacherById(_userId, _accessToken);
+    });
+  }
+
+  _logout(BuildContext context) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.clear();
+    Future.delayed(Duration.zero, () {
+      Navigator.pushNamed(context, '/');
     });
   }
 }

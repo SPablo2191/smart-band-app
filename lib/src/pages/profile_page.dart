@@ -80,9 +80,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           child: Align(
                             alignment: Alignment.topCenter,
                             child: IconButton(
-                              onPressed: () {
-                                // Acción del IconButton
-                              },
+                              onPressed: () {},
                               icon: const Icon(
                                 Icons.add,
                                 size: 20,
@@ -140,7 +138,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           );
         } else {
-          return Container(); // Widget alternativo en caso de no haber datos disponibles
+          return Container();
         }
       },
     );
@@ -157,8 +155,7 @@ class _ProfilePageState extends State<ProfilePage> {
         } else if (snapshot.hasData) {
           final teacher = snapshot.data!;
           return TextField(
-            controller: TextEditingController(
-                text: teacher.name), // Establece el valor inicial del TextField
+            controller: TextEditingController(text: teacher.name),
             onChanged: (value) => setState(() {
               teacher.name = value;
             }),
@@ -179,7 +176,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           );
         } else {
-          return Container(); // Widget alternativo en caso de no haber datos disponibles
+          return Container();
         }
       },
     );
@@ -212,7 +209,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           );
         } else {
-          return Container(); // Widget alternativo en caso de no haber datos disponibles
+          return Container();
         }
       },
     );
@@ -233,23 +230,29 @@ class _ProfilePageState extends State<ProfilePage> {
           return Column(
             children: schools!.map((school) {
               final String schoolName = school['school']['name'];
-              final bool schoolStatus = school['school']['status'];
-              final int schoolId = school['school']['id'];
-              final String schoolRegisterDate =
-                  school['school']['register_date'];
 
               return Card(
-                child: ListTile(
-                  title: Text(schoolName),
-                  subtitle: Text(
-                      'Status: $schoolStatus\nID: $schoolId\nRegister Date: $schoolRegisterDate'),
-                  // Agrega aquí cualquier otra información que desees mostrar en el ListTile
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                    color: colorLight,
+                    child: ListTile(
+                      leading: const Icon(
+                        Icons.home_filled,
+                        color: colorPrimary,
+                      ),
+                      title: Text(
+                        schoolName,
+                        style: const TextStyle(color: colorPrimary),
+                      ),
+                    ),
+                  ),
                 ),
               );
             }).toList(),
           );
         } else {
-          return Container(); // Widget alternativo en caso de no haber datos disponibles
+          return Container();
         }
       },
     );

@@ -100,7 +100,7 @@ class _HomePageState extends State<HomePage> {
 
   _getMainFunctions() {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border(
           top: BorderSide(
             color: colorSecondary,
@@ -116,7 +116,7 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.only(top: 10, bottom: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
+          children: const [
             HomeButton(
                 buttonColor: colorSecondary,
                 buttonIconColor: colorPrimary,
@@ -143,25 +143,6 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
-  // _getTests() {
-  //   return Padding(
-  //     padding: const EdgeInsets.all(12.0),
-  //     child: Column(
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       children: [
-  //         Text(
-  //           'Evaluaciones',
-  //           style: TextStyle(color: colorPrimary, fontSize: 20),
-  //         ),
-  //         TestCard(),
-  //         TestCard(),
-  //         TestCard(),
-  //         TestCard(),
-  //       ],
-  //     ),
-  //   );
-  // }
 
   _getTests() {
     return FutureBuilder<Teacher>(

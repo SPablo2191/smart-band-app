@@ -19,7 +19,7 @@ class _RegisterStep2PageState extends State<RegisterStep2Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Registrarse'),
+      appBar: const CustomAppBar(title: 'Registrarse'),
       body: ListView(
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
           children: [
@@ -211,7 +211,6 @@ class _RegisterStep2PageState extends State<RegisterStep2Page> {
                 onConfirm: (results) {
                   List<School> options = [];
                   for (dynamic element in results) {
-                    School aux = School(name: element?.name, id: element?.id);
                     options.add(element);
                   }
                   schoolsSelected = options;
@@ -251,6 +250,6 @@ class _RegisterStep2PageState extends State<RegisterStep2Page> {
         textColor: const Color.fromRGBO(221, 245, 246, 1),
         fontSize: 16.0);
     Future.delayed(
-        Duration(seconds: 2), () => {Navigator.pushNamed(context, '/')});
+        const Duration(seconds: 2), () => {Navigator.pushNamed(context, '/')});
   }
 }

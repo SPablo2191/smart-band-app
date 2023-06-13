@@ -163,7 +163,7 @@ class _LoginPageState extends State<LoginPage> {
               style: const TextStyle(fontSize: 20),
             ),
           if (_isLoading) // Muestra el indicador de carga solo si está en estado de carga
-            CircularProgressIndicator(
+            const CircularProgressIndicator(
               valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
             ),
         ],
@@ -175,6 +175,7 @@ class _LoginPageState extends State<LoginPage> {
     AuthProvider authProvider = AuthProvider();
     final band = await authProvider.login(_teacher.email, _teacher.password);
     if (band) {
+      // ignore: use_build_context_synchronously
       Navigator.pushNamed(context, 'home');
     } else {
       Fluttertoast.showToast(

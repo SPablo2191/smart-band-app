@@ -1,4 +1,4 @@
-import 'package:smartband/src/models/school_model.dart';
+
 
 class Test {
   int? id;

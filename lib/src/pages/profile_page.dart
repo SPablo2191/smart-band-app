@@ -59,7 +59,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     padding: const EdgeInsets.only(top: 12.0),
                     child: Row(
                       children: [
-                        Expanded(
+                        const Expanded(
                           child: Text(
                             'Colegios',
                             style: TextStyle(color: colorPrimary, fontSize: 20),
@@ -109,7 +109,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   _getProfilePicture() {
-    return PersonIcon(icon: Icons.person, size: 150);
+    return const PersonIcon(icon: Icons.person, size: 150);
   }
 
   _getDNI() {
@@ -151,7 +151,7 @@ class _ProfilePageState extends State<ProfilePage> {
       future: _teacher,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else if (snapshot.hasData) {
@@ -223,7 +223,7 @@ class _ProfilePageState extends State<ProfilePage> {
       future: _teacher,
       builder: (BuildContext context, AsyncSnapshot<Teacher> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else if (snapshot.hasData) {

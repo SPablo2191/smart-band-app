@@ -15,7 +15,7 @@ class _RegisterStep1PageState extends State<RegisterStep1Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Registrarse'),
+      appBar: const CustomAppBar(title: 'Registrarse'),
       body: ListView(
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
           children: [

@@ -10,7 +10,6 @@ class TeacherProvider {
 
   Future<Teacher> getTeacherById(int? id, String? accessToken) async {
     final url = Uri.parse('$_url$route/$id');
-    print('url: $url');
     final resp = await http.get(
       url,
       headers: {
@@ -20,7 +19,6 @@ class TeacherProvider {
     );
     final decodedData = json.decode(resp.body);
     final user = Teacher.fromJsonMap(decodedData);
-    print(user.name);
     return user;
   }
 }

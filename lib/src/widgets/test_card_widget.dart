@@ -9,7 +9,7 @@ class TestCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 100,
       child: Card(
         color: colorLight,
@@ -18,12 +18,12 @@ class TestCard extends StatelessWidget {
           children: <Widget>[
             ListTile(
               title: Row(
-                children: [
+                children: const [
                   Text(
                     'Promoción: 2024',
                     style: TextStyle(color: colorPrimary),
                   ),
-                  const SizedBox(
+                  SizedBox(
                     width: 20,
                   ),
                   Text(
@@ -36,7 +36,7 @@ class TestCard extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 8.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                  children: const [
                     Text(
                       'Fecha de Creación: 14/05/2023',
                       style: TextStyle(color: colorPrimary),

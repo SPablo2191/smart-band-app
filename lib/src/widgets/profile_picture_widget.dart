@@ -7,7 +7,7 @@ class PersonIcon extends StatelessWidget {
   final double size;
   final Color circleColor;
 
-  PersonIcon({
+  const PersonIcon({
     required this.icon,
     this.iconColor = colorExtraLight,
     this.size = 40.0,

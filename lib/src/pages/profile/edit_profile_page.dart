@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
+import 'package:multi_select_flutter/util/multi_select_item.dart';
+import 'package:multi_select_flutter/util/multi_select_list_type.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smartband/src/widgets/ui/ui_button_widget.dart';
 
 import '../../core/consts/colors.dart';
+import '../../models/school_model.dart';
 import '../../models/teacher_model.dart';
+import '../../providers/school_provider.dart';
 import '../../providers/teacher_provider.dart';
 import '../../widgets/appbar_widget.dart';
 import '../../widgets/bottom_navigation_bar_widget.dart';
@@ -20,8 +25,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
   String? _accessToken = '';
   Future<Teacher>? _teacher;
   int? _userId = 0;
+  List<School> schoolsSelected = [];
   final _name = TextEditingController();
-  final _last_name = TextEditingController();
+  final _lastName = TextEditingController();
   final _dni = TextEditingController();
   @override
   void initState() {
@@ -48,6 +54,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
               _getName(),
               Container(height: 15),
               _getLastName(),
+              Container(
+                height: 15,
+              ),
+              _getSchools(),
               Container(height: 15),
               UiButton(
                 label: 'Guardar',
@@ -147,9 +157,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
           final teacher = snapshot.data!;
-          _last_name.text = teacher.last_name;
+          _lastName.text = teacher.last_name;
           return TextField(
-            controller: _last_name,
+            controller: _lastName,
             textCapitalization: TextCapitalization.sentences,
             decoration: InputDecoration(
               filled: true,
@@ -182,7 +192,111 @@ class _EditProfilePageState extends State<EditProfilePage> {
     });
   }
 
+  _getSchools() {
+    final SchoolProvider schoolProvider = SchoolProvider();
+
+    return FutureBuilder(
+      future: _teacher,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          final teacher = snapshot.data!;
+          final schools = teacher.schools;
+
+          final selectedSchools = schools?.map((school) {
+                final schoolName = school['school']['name'];
+                final schoolId = school['school']['id'];
+                return School(id: schoolId, name: schoolName);
+              }).toList() ??
+              [];
+
+          final futureItems = schoolProvider
+              .getSchools(); // Obtener las escuelas desde el provider
+
+          return FutureBuilder<List<School>>(
+            future: futureItems,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                final List<School> allSchools = snapshot.data!;
+
+                final items = allSchools
+                    .map((school) => MultiSelectItem<School>(
+                          school,
+                          school.name ?? '',
+                        ))
+                    .toList();
+
+                return Container(
+                  decoration: BoxDecoration(
+                    color: const Color.fromRGBO(221, 245, 246, 1),
+                    border: Border.all(
+                      color: const Color.fromRGBO(29, 53, 87, 1),
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: MultiSelectDialogField<School>(
+                    searchable: true,
+                    listType: MultiSelectListType.CHIP,
+                    dialogHeight: 160,
+                    title: const Text('Seleccionar'),
+                    items: items,
+                    initialValue: selectedSchools,
+                    buttonIcon: const Icon(
+                      Icons.home_filled,
+                      color: Color.fromRGBO(29, 53, 87, 1),
+                    ),
+                    buttonText: const Text(
+                      "Colegio",
+                      style: TextStyle(
+                        color: Color.fromRGBO(29, 53, 87, 1),
+                        fontSize: 16,
+                      ),
+                    ),
+                    onConfirm: (results) {
+                      setState(() {
+                        // print(results);
+                        schoolsSelected = results;
+                      });
+                    },
+                  ),
+                );
+              } else if (snapshot.hasError) {
+                return Text('${snapshot.error}');
+              }
+
+              return Container(
+                height: 1,
+                width: 10,
+                margin: const EdgeInsets.all(5),
+                child: const CircularProgressIndicator(
+                  strokeWidth: 4,
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    Color.fromRGBO(29, 53, 87, 1),
+                  ),
+                ),
+              );
+            },
+          );
+        } else if (snapshot.hasError) {
+          return Text('${snapshot.error}');
+        }
+
+        return Container(
+          height: 10,
+          width: 10,
+          margin: const EdgeInsets.all(5),
+          child: const CircularProgressIndicator(
+            strokeWidth: 4,
+            valueColor: AlwaysStoppedAnimation<Color>(
+              Color.fromRGBO(29, 53, 87, 1),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   _saveData() {
-    print(_name.text);
+    // print(_name.text);
   }
 }

@@ -33,6 +33,5 @@ class UiButton extends StatelessWidget {
         style: const TextStyle(fontSize: 20),
       ),
     );
-    ;
   }
 }

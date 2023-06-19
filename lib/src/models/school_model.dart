@@ -10,6 +10,12 @@ class School {
     this.status,
     this.registerDate,
   });
+  @override
+  String toString() {
+    return name ??
+        ''; // Mostrar el nombre de la escuela como representación en forma de texto
+  }
+
   School.fromJsonMap(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];

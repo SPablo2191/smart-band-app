@@ -21,4 +21,28 @@ class TeacherProvider {
     final user = Teacher.fromJsonMap(decodedData);
     return user;
   }
+
+  Future<bool> updateTeacher(Teacher teacher, String? accessToken) async {
+    try {
+      final url = Uri.parse('$_url$route/${teacher.id}');
+      String body = jsonEncode(teacher.getMap());
+      final resp = await http.put(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $accessToken',
+        },
+        body: body,
+      );
+
+      if (resp.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
 }

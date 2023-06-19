@@ -73,7 +73,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   label: 'Cancelar',
                   color: colorRed,
                   context: context,
-                  onPressedCallback: () => Navigator.pop(context)),
+                  onPressedCallback: () =>
+                      Navigator.pushNamed(context, 'profile')),
             ],
           ),
         ),
@@ -241,6 +242,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       searchable: true,
                       initialValue: selectedSchools,
                       listType: MultiSelectListType.CHIP,
+                      chipDisplay: MultiSelectChipDisplay(
+                        onTap: (value) {
+                          setState(() {
+                            selectedSchools.remove(value);
+                          });
+                        },
+                      ),
                       dialogHeight: 160,
                       title: const Text('Seleccionar'),
                       items: items,
@@ -299,7 +307,25 @@ class _EditProfilePageState extends State<EditProfilePage> {
     );
   }
 
-  _saveData() {
-    print(_name.text);
+  _saveData() async {
+    final TeacherProvider teacherProvider = TeacherProvider();
+    final teacher = Teacher(
+      id: _userId,
+      DNI: _dni.text,
+      name: _name.text,
+      last_name: _lastName.text,
+      schools: schoolsSelected,
+    );
+    final band = await teacherProvider.updateTeacher(teacher, _accessToken);
+    if (band) {
+      // ignore: use_build_context_synchronously
+      Navigator.pushNamed(context, 'profile');
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Error al actualizar los datos'),
+        ),
+      );
+    }
   }
 }

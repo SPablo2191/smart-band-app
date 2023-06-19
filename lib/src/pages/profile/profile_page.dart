@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smartband/src/core/consts/colors.dart';
 
-import '../models/teacher_model.dart';
-import '../providers/teacher_provider.dart';
-import '../widgets/appbar_widget.dart';
-import '../widgets/profile_picture_widget.dart';
+import '../../models/teacher_model.dart';
+import '../../providers/teacher_provider.dart';
+import '../../widgets/appbar_widget.dart';
+import '../../widgets/profile_picture_widget.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -73,7 +73,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   Container(
                     height: 40,
                   ),
-                  _getButton('Cerrar Sesión', colorRed, context),
+                  _getButton('Editar Perfil', colorPrimary, context),
+                  Container(
+                    height: 10,
+                  ),
+                  _getButton('Cerrar Sesión', colorRed, context,
+                      onPressedCallback: () => _logout(context)),
                 ],
               ),
             ),
@@ -239,9 +244,12 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   _getButton(String label, color, BuildContext context,
-      {borderColor = Colors.white, textColor = Colors.white}) {
+      {borderColor = Colors.white,
+      textColor = Colors.white,
+      VoidCallback? onPressedCallback}) {
     return ElevatedButton(
-      onPressed: () => _logout(context),
+      onPressed: onPressedCallback,
+      // onPressed: () => _logout(context),
       style: ElevatedButton.styleFrom(
         backgroundColor: color,
         foregroundColor: textColor,

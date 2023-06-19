@@ -73,7 +73,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   Container(
                     height: 40,
                   ),
-                  _getButton('Editar Perfil', colorPrimary, context),
+                  _getButton('Editar Perfil', colorPrimary, context,
+                      onPressedCallback: () =>
+                          Navigator.pushNamed(context, '/')),
                   Container(
                     height: 10,
                   ),

@@ -5,6 +5,7 @@ import 'package:smartband/src/core/consts/colors.dart';
 import '../../models/teacher_model.dart';
 import '../../providers/teacher_provider.dart';
 import '../../widgets/appbar_widget.dart';
+import '../../widgets/bottom_navigation_bar_widget.dart';
 import '../../widgets/profile_picture_widget.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -27,67 +28,68 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(
-        title: 'Mi Perfil',
-        showBackButton: true,
-        centerTitle: false,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 20.0, right: 15, left: 15),
-        child: ListView(
-          children: [
-            _getProfilePicture(),
-            Container(height: 50),
-            _getDNI(),
-            Container(height: 15),
-            _getName(),
-            Container(height: 15),
-            _getLastName(),
-            Container(height: 15),
-            Container(
-              decoration: const BoxDecoration(
-                border: Border(
-                  top: BorderSide(
-                    color: colorSecondary,
-                    width: 1.0,
-                  ),
-                ),
-              ),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 12.0),
-                    child: Row(
-                      children: const [
-                        Expanded(
-                          child: Text(
-                            'Colegios',
-                            style: TextStyle(color: colorPrimary, fontSize: 20),
-                          ),
-                        ),
-                        SizedBox(width: 20),
-                      ],
+        appBar: const CustomAppBar(
+          title: 'Mi Perfil',
+          showBackButton: true,
+          centerTitle: false,
+        ),
+        body: Padding(
+          padding: const EdgeInsets.only(top: 20.0, right: 15, left: 15),
+          child: ListView(
+            children: [
+              _getProfilePicture(),
+              Container(height: 50),
+              _getDNI(),
+              Container(height: 15),
+              _getName(),
+              Container(height: 15),
+              _getLastName(),
+              Container(height: 15),
+              Container(
+                decoration: const BoxDecoration(
+                  border: Border(
+                    top: BorderSide(
+                      color: colorSecondary,
+                      width: 1.0,
                     ),
                   ),
-                  _getSchools(),
-                  Container(
-                    height: 40,
-                  ),
-                  _getButton('Editar Perfil', colorPrimary, context,
-                      onPressedCallback: () =>
-                          Navigator.pushNamed(context, '/')),
-                  Container(
-                    height: 10,
-                  ),
-                  _getButton('Cerrar Sesión', colorRed, context,
-                      onPressedCallback: () => _logout(context)),
-                ],
+                ),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 12.0),
+                      child: Row(
+                        children: const [
+                          Expanded(
+                            child: Text(
+                              'Colegios',
+                              style:
+                                  TextStyle(color: colorPrimary, fontSize: 20),
+                            ),
+                          ),
+                          SizedBox(width: 20),
+                        ],
+                      ),
+                    ),
+                    _getSchools(),
+                    Container(
+                      height: 40,
+                    ),
+                    _getButton('Editar Perfil', colorPrimary, context,
+                        onPressedCallback: () =>
+                            Navigator.pushNamed(context, 'profile/edit')),
+                    Container(
+                      height: 10,
+                    ),
+                    _getButton('Cerrar Sesión', colorRed, context,
+                        onPressedCallback: () => _logout(context)),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    );
+        bottomNavigationBar: const CustomBottomNavigationBar());
   }
 
   _getProfilePicture() {

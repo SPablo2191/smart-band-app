@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:smartband/src/pages/home_page.dart';
+import 'package:smartband/src/pages/profile/edit_profile_page.dart';
 import 'package:smartband/src/pages/profile/profile_page.dart';
 import 'package:smartband/src/pages/promotion_page.dart';
 import 'package:smartband/src/pages/register/register_step_2_page.dart';
@@ -18,6 +19,7 @@ Map<String, WidgetBuilder> getRoutes() {
     'register/step2': (BuildContext context) => const RegisterStep2Page(),
     'home': (BuildContext context) => const HomePage(),
     'profile': (BuildContext context) => const ProfilePage(),
-    'promotion': (context) => const PromotionPage()
+    'promotion': (context) => const PromotionPage(),
+    'profile/edit': (context) => const EditProfilePage()
   };
 }

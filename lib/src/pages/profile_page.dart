@@ -96,7 +96,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   Container(
                     height: 40,
                   ),
-                  _getButton('Cerrar Sesión', colorPrimary, context),
+                  _getButton('Cerrar Sesión', colorRed, context),
                 ],
               ),
             ),
@@ -117,6 +117,7 @@ class _ProfilePageState extends State<ProfilePage> {
         if (snapshot.hasData) {
           final teacher = snapshot.data!;
           return TextField(
+            enabled: false,
             controller: TextEditingController(text: teacher.DNI),
             onChanged: (value) => setState(() {
               teacher.DNI = value;
@@ -155,6 +156,7 @@ class _ProfilePageState extends State<ProfilePage> {
         } else if (snapshot.hasData) {
           final teacher = snapshot.data!;
           return TextField(
+            enabled: false,
             controller: TextEditingController(text: teacher.name),
             onChanged: (value) => setState(() {
               teacher.name = value;
@@ -189,6 +191,7 @@ class _ProfilePageState extends State<ProfilePage> {
         if (snapshot.hasData) {
           final teacher = snapshot.data!;
           return TextField(
+            enabled: false,
             controller: TextEditingController(text: teacher.last_name),
             onChanged: (value) => setState(() {
               teacher.last_name = value;
@@ -265,7 +268,7 @@ class _ProfilePageState extends State<ProfilePage> {
       style: ElevatedButton.styleFrom(
         backgroundColor: color,
         foregroundColor: textColor,
-        minimumSize: const Size(250, 50),
+        minimumSize: const Size(350, 50),
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
             side: BorderSide(color: borderColor, width: 1.0)),

@@ -58,37 +58,14 @@ class _ProfilePageState extends State<ProfilePage> {
                   Padding(
                     padding: const EdgeInsets.only(top: 12.0),
                     child: Row(
-                      children: [
-                        const Expanded(
+                      children: const [
+                        Expanded(
                           child: Text(
                             'Colegios',
                             style: TextStyle(color: colorPrimary, fontSize: 20),
                           ),
                         ),
-                        const SizedBox(width: 20),
-                        Container(
-                          width: 40,
-                          height: 40,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(5),
-                            border: Border.all(
-                              color: colorPrimary,
-                              width: 2,
-                            ),
-                          ),
-                          child: Align(
-                            alignment: Alignment.topCenter,
-                            child: IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.add,
-                                size: 20,
-                                color: colorPrimary,
-                              ),
-                            ),
-                          ),
-                        ),
+                        SizedBox(width: 20),
                       ],
                     ),
                   ),

@@ -229,7 +229,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     [];
 
                 return Container(
-                  height: 100,
                   decoration: BoxDecoration(
                     color: colorLight,
                     border: Border.all(
@@ -301,6 +300,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
   }
 
   _saveData() {
-    // print(_name.text);
+    print(_name.text);
   }
 }

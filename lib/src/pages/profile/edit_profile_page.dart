@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
+import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
 import 'package:multi_select_flutter/util/multi_select_list_type.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -25,7 +26,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   String? _accessToken = '';
   Future<Teacher>? _teacher;
   int? _userId = 0;
-  List<School> schoolsSelected = [];
+  List<dynamic> schoolsSelected = [];
   final _name = TextEditingController();
   final _lastName = TextEditingController();
   final _dni = TextEditingController();
@@ -58,7 +59,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 height: 15,
               ),
               _getSchools(),
-              Container(height: 15),
+              Container(height: 40),
               UiButton(
                 label: 'Guardar',
                 color: colorPrimary,
@@ -201,14 +202,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
         if (snapshot.hasData) {
           final teacher = snapshot.data!;
           final schools = teacher.schools;
-
-          final selectedSchools = schools?.map((school) {
-                final schoolName = school['school']['name'];
-                final schoolId = school['school']['id'];
-                return School(id: schoolId, name: schoolName);
-              }).toList() ??
-              [];
-
           final futureItems = schoolProvider
               .getSchools(); // Obtener las escuelas desde el provider
 
@@ -224,41 +217,52 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           school.name ?? '',
                         ))
                     .toList();
+                final selectedSchools = schools?.map((school) {
+                      final schoolName = school['school']['name'];
+                      final schoolId = school['school']['id'];
+                      final matchingSchool = allSchools.firstWhere(
+                        (s) => s.id == schoolId && s.name == schoolName,
+                        orElse: () => School(id: schoolId, name: schoolName),
+                      );
+                      return matchingSchool;
+                    }).toList() ??
+                    [];
 
                 return Container(
+                  height: 100,
                   decoration: BoxDecoration(
-                    color: const Color.fromRGBO(221, 245, 246, 1),
+                    color: colorLight,
                     border: Border.all(
-                      color: const Color.fromRGBO(29, 53, 87, 1),
+                      color: colorPrimary,
                       width: 1,
                     ),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  child: MultiSelectDialogField<School>(
-                    searchable: true,
-                    listType: MultiSelectListType.CHIP,
-                    dialogHeight: 160,
-                    title: const Text('Seleccionar'),
-                    items: items,
-                    initialValue: selectedSchools,
-                    buttonIcon: const Icon(
-                      Icons.home_filled,
-                      color: Color.fromRGBO(29, 53, 87, 1),
-                    ),
-                    buttonText: const Text(
-                      "Colegio",
-                      style: TextStyle(
+                  child: MultiSelectDialogField(
+                      searchable: true,
+                      initialValue: selectedSchools,
+                      listType: MultiSelectListType.CHIP,
+                      dialogHeight: 160,
+                      title: const Text('Seleccionar'),
+                      items: items,
+                      buttonIcon: const Icon(
+                        Icons.home_filled,
                         color: Color.fromRGBO(29, 53, 87, 1),
-                        fontSize: 16,
                       ),
-                    ),
-                    onConfirm: (results) {
-                      setState(() {
-                        // print(results);
-                        schoolsSelected = results;
-                      });
-                    },
-                  ),
+                      buttonText: const Text(
+                        "Colegio",
+                        style: TextStyle(
+                          color: Color.fromRGBO(29, 53, 87, 1),
+                          fontSize: 16,
+                        ),
+                      ),
+                      onConfirm: (results) {
+                        List<School> options = [];
+                        for (dynamic element in results) {
+                          options.add(element);
+                        }
+                        schoolsSelected = options;
+                      }),
                 );
               } else if (snapshot.hasError) {
                 return Text('${snapshot.error}');

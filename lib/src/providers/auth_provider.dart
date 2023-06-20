@@ -45,12 +45,10 @@ class AuthProvider {
         prefs.setInt('userId', decodedData['user_id']);
         return true;
       } else {
-        print('Error: ${resp.statusCode}');
         return false;
       }
     } catch (e) {
       // Hubo un error al realizar la solicitud HTTP
-      print('Error: $e');
       return false;
     }
   }

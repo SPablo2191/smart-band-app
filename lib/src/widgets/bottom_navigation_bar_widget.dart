@@ -8,7 +8,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border(
           top: BorderSide(
             color: colorSecondary,
@@ -20,9 +20,9 @@ class CustomBottomNavigationBar extends StatelessWidget {
       child: InkWell(
         onTap: () => {Navigator.pushNamed(context, 'home')},
         child: Padding(
-          padding: EdgeInsets.only(top: 8.0),
+          padding: const EdgeInsets.only(top: 8.0),
           child: Column(
-            children: <Widget>[
+            children: const <Widget>[
               Icon(
                 Icons.home,
                 color: colorPrimary,

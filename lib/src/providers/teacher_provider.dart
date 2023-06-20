@@ -10,7 +10,6 @@ class TeacherProvider {
 
   Future<Teacher> getTeacherById(int? id, String? accessToken) async {
     final url = Uri.parse('$_url$route/$id');
-    print('url: $url');
     final resp = await http.get(
       url,
       headers: {
@@ -20,7 +19,30 @@ class TeacherProvider {
     );
     final decodedData = json.decode(resp.body);
     final user = Teacher.fromJsonMap(decodedData);
-    print(user.name);
     return user;
+  }
+
+  Future<bool> updateTeacher(Teacher teacher, String? accessToken) async {
+    try {
+      final url = Uri.parse('$_url$route/${teacher.id}');
+      String body = jsonEncode(teacher.getMap());
+      final resp = await http.put(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $accessToken',
+        },
+        body: body,
+      );
+
+      if (resp.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print(e);
+      return false;
+    }
   }
 }

@@ -9,7 +9,7 @@ class SchoolProvider {
   final String route = getApiRoutes()['schools'] ?? '';
 
   Future<List<School>> getSchools() async {
-    final url = Uri.parse('${_url}${route}');
+    final url = Uri.parse('$_url$route');
     final resp = await http.get(url);
     final decodedData = json.decode(resp.body);
     final schools = Schools.fromJsonList(decodedData);

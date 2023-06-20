@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
       future: _teacher,
       builder: (BuildContext context, AsyncSnapshot<Teacher> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else if (snapshot.hasData) {
@@ -100,7 +100,7 @@ class _HomePageState extends State<HomePage> {
 
   _getMainFunctions() {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border(
           top: BorderSide(
             color: colorSecondary,
@@ -116,7 +116,7 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.only(top: 10, bottom: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
+          children: const [
             HomeButton(
                 buttonColor: colorSecondary,
                 buttonIconColor: colorPrimary,
@@ -144,31 +144,12 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // _getTests() {
-  //   return Padding(
-  //     padding: const EdgeInsets.all(12.0),
-  //     child: Column(
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       children: [
-  //         Text(
-  //           'Evaluaciones',
-  //           style: TextStyle(color: colorPrimary, fontSize: 20),
-  //         ),
-  //         TestCard(),
-  //         TestCard(),
-  //         TestCard(),
-  //         TestCard(),
-  //       ],
-  //     ),
-  //   );
-  // }
-
   _getTests() {
     return FutureBuilder<Teacher>(
       future: _teacher,
       builder: (BuildContext context, AsyncSnapshot<Teacher> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return  const CircularProgressIndicator();
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else if (snapshot.hasData) {
@@ -178,7 +159,7 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'Evaluaciones',
                   style: TextStyle(color: colorPrimary, fontSize: 20),
                 ),
@@ -195,7 +176,7 @@ class _HomePageState extends State<HomePage> {
                   Container(
                     alignment: Alignment.center,
                     height: 100,
-                    child: Center(
+                    child:  const Center(
                       child: Text(
                         'No hay evaluaciones disponibles',
                         style: TextStyle(color: colorPrimary, fontSize: 20),

@@ -1,9 +1,9 @@
-import 'package:smartband/src/models/school_model.dart';
-
 class Test {
   int? id;
+  // ignore: non_constant_identifier_names
   String? DNI;
   String? name;
+  // ignore: non_constant_identifier_names
   String? last_name;
   String? password;
   String? email;
@@ -15,7 +15,9 @@ class Test {
   Test(
       {this.id,
       this.name,
+      // ignore: non_constant_identifier_names
       this.last_name,
+      // ignore: non_constant_identifier_names
       this.DNI,
       this.email,
       this.password,

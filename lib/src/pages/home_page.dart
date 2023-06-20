@@ -124,7 +124,7 @@ class _HomePageState extends State<HomePage> {
                     buttonIconColor: colorPrimary,
                     buttonIcon: Icons.person_add_alt,
                     buttonLabelColor: colorPrimary,
-                    path: 'promotion',
+                    path: 'student',
                     buttonLabel: 'Ver Estudiantes'),
                 HomeButton(
                     buttonColor: colorSecondary,

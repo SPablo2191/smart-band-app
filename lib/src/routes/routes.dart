@@ -10,6 +10,7 @@ import 'package:smartband/src/pages/start_page.dart';
 
 import '../pages/login_page.dart';
 import '../pages/register/register_step_1_page.dart';
+import '../pages/student_page.dart';
 
 Map<String, WidgetBuilder> getRoutes() {
   return <String, WidgetBuilder>{
@@ -20,6 +21,7 @@ Map<String, WidgetBuilder> getRoutes() {
     'home': (BuildContext context) => const HomePage(),
     'profile': (BuildContext context) => const ProfilePage(),
     'promotion': (context) => const PromotionPage(),
-    'profile/edit': (context) => const EditProfilePage()
+    'profile/edit': (context) => const EditProfilePage(),
+    'student': (context) => const StudentPage(),
   };
 }

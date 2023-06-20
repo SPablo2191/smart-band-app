@@ -11,19 +11,24 @@ class HomeButton extends StatelessWidget {
   final double left;
   final double right;
   final double bottom;
+  final IconData? startIcon; // Nuevo campo opcional para el icono al comienzo
+  final IconData? endIcon; // Nuevo campo opcional para el icono al final
 
-  const HomeButton(
-      {required this.buttonColor,
-      required this.buttonIconColor,
-      required this.buttonIcon,
-      required this.buttonLabel,
-      required this.buttonLabelColor,
-      required this.path,
-      this.top = 1.0,
-      this.left = 1.0,
-      this.bottom = 1.0,
-      this.right = 1.0,
-      super.key});
+  const HomeButton({
+    required this.buttonColor,
+    required this.buttonIconColor,
+    required this.buttonIcon,
+    required this.buttonLabel,
+    required this.buttonLabelColor,
+    required this.path,
+    this.top = 1.0,
+    this.left = 1.0,
+    this.bottom = 1.0,
+    this.right = 1.0,
+    this.startIcon, // Inicializar el campo opcional del icono al comienzo
+    this.endIcon, // Inicializar el campo opcional del icono al final
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,15 +44,30 @@ class HomeButton extends StatelessWidget {
               shape: BoxShape.circle,
               color: buttonColor,
             ),
-            child: IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, path);
-              },
-              iconSize: 30,
-              icon: Icon(
-                buttonIcon,
-                color: buttonIconColor,
-              ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                if (startIcon != null)
+                  Icon(
+                    startIcon,
+                    color: buttonIconColor,
+                  ),
+                IconButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, path);
+                  },
+                  iconSize: 30,
+                  icon: Icon(
+                    buttonIcon,
+                    color: buttonIconColor,
+                  ),
+                ),
+                if (endIcon != null)
+                  Icon(
+                    endIcon,
+                    color: buttonIconColor,
+                  ),
+              ],
             ),
           ),
           const SizedBox(height: 8),

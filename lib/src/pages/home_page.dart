@@ -114,30 +114,46 @@ class _HomePageState extends State<HomePage> {
       ),
       child: Padding(
         padding: const EdgeInsets.only(top: 10, bottom: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: const [
-            HomeButton(
-                buttonColor: colorSecondary,
-                buttonIconColor: colorPrimary,
-                buttonIcon: Icons.people_alt_outlined,
-                buttonLabelColor: colorPrimary,
-                path: 'promotion',
-                buttonLabel: 'Ver\nPromociones'),
-            HomeButton(
-                buttonColor: colorSecondary,
-                buttonIconColor: colorPrimary,
-                buttonIcon: Icons.add_chart_rounded,
-                buttonLabelColor: colorPrimary,
-                path: '',
-                buttonLabel: 'Crear\nEvaluaciones'),
-            HomeButton(
-                buttonColor: colorSecondary,
-                buttonIconColor: colorPrimary,
-                buttonIcon: Icons.file_copy_outlined,
-                buttonLabelColor: colorPrimary,
-                path: '',
-                buttonLabel: 'Historial\nEvaluaciones'),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: const [
+                HomeButton(
+                    buttonColor: colorSecondary,
+                    buttonIconColor: colorPrimary,
+                    buttonIcon: Icons.person_add_alt,
+                    buttonLabelColor: colorPrimary,
+                    path: 'promotion',
+                    buttonLabel: 'Ver Estudiantes'),
+                HomeButton(
+                    buttonColor: colorSecondary,
+                    buttonIconColor: colorPrimary,
+                    buttonIcon: Icons.people_alt_outlined,
+                    buttonLabelColor: colorPrimary,
+                    path: 'promotion',
+                    buttonLabel: 'Ver Promociones'),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: const [
+                HomeButton(
+                    buttonColor: colorSecondary,
+                    buttonIconColor: colorPrimary,
+                    buttonIcon: Icons.add_chart_rounded,
+                    buttonLabelColor: colorPrimary,
+                    path: '',
+                    buttonLabel: 'Crear Evaluaciones'),
+                HomeButton(
+                    buttonColor: colorSecondary,
+                    buttonIconColor: colorPrimary,
+                    buttonIcon: Icons.file_copy_outlined,
+                    buttonLabelColor: colorPrimary,
+                    path: '',
+                    buttonLabel: 'Historial Evaluaciones'),
+              ],
+            ),
           ],
         ),
       ),
@@ -149,7 +165,7 @@ class _HomePageState extends State<HomePage> {
       future: _teacher,
       builder: (BuildContext context, AsyncSnapshot<Teacher> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return  const CircularProgressIndicator();
+          return const CircularProgressIndicator();
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else if (snapshot.hasData) {
@@ -176,7 +192,7 @@ class _HomePageState extends State<HomePage> {
                   Container(
                     alignment: Alignment.center,
                     height: 100,
-                    child:  const Center(
+                    child: const Center(
                       child: Text(
                         'No hay evaluaciones disponibles',
                         style: TextStyle(color: colorPrimary, fontSize: 20),

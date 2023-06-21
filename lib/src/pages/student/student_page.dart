@@ -5,8 +5,8 @@ import 'package:smartband/src/widgets/bottom_navigation_bar_widget.dart';
 import 'package:smartband/src/widgets/student_card_widget.dart';
 import 'package:smartband/src/widgets/ui/ui_button_widget.dart';
 
-import '../models/school_model.dart';
-import '../providers/school_provider.dart';
+import '../../models/school_model.dart';
+import '../../providers/school_provider.dart';
 
 class StudentPage extends StatefulWidget {
   const StudentPage({Key? key}) : super(key: key);
@@ -38,7 +38,8 @@ class _StudentPageState extends State<StudentPage> {
               color: colorSecondary,
               textColor: colorPrimary,
               context: context,
-              onPressedCallback: () => {},
+              onPressedCallback: () =>
+                  {Navigator.pushNamed(context, 'student/add')},
               startIcon: Icons.person_add_alt_1_outlined,
               bottom: 10,
               endIcon: Icons.add_box_outlined,

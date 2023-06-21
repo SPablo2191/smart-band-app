@@ -7,10 +7,11 @@ import 'package:smartband/src/pages/profile/profile_page.dart';
 import 'package:smartband/src/pages/promotion_page.dart';
 import 'package:smartband/src/pages/register/register_step_2_page.dart';
 import 'package:smartband/src/pages/start_page.dart';
+import 'package:smartband/src/pages/student/add_student_page.dart';
 
 import '../pages/login_page.dart';
 import '../pages/register/register_step_1_page.dart';
-import '../pages/student_page.dart';
+import '../pages/student/student_page.dart';
 
 Map<String, WidgetBuilder> getRoutes() {
   return <String, WidgetBuilder>{
@@ -23,5 +24,6 @@ Map<String, WidgetBuilder> getRoutes() {
     'promotion': (context) => const PromotionPage(),
     'profile/edit': (context) => const EditProfilePage(),
     'student': (context) => const StudentPage(),
+    'student/add': (context) => const StudentAddPage(),
   };
 }

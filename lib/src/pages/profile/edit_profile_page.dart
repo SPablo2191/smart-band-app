@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
-import 'package:multi_select_flutter/util/multi_select_item.dart';
-import 'package:multi_select_flutter/util/multi_select_list_type.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smartband/src/widgets/ui/ui_button_widget.dart';
 
@@ -321,6 +318,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
       // ignore: use_build_context_synchronously
       Navigator.pushNamed(context, 'profile');
     } else {
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Error al actualizar los datos'),

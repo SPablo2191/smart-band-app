@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smartband/src/core/consts/colors.dart';
 import 'package:smartband/src/widgets/appbar_widget.dart';
 import 'package:smartband/src/widgets/bottom_navigation_bar_widget.dart';
+import 'package:smartband/src/widgets/student_card_widget.dart';
 import 'package:smartband/src/widgets/ui/ui_button_widget.dart';
 
 import '../models/school_model.dart';
@@ -30,7 +31,7 @@ class _StudentPageState extends State<StudentPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.only(top: 20.0, right: 15, left: 15),
-        child: ListView(
+        child: Column(
           children: [
             UiButton(
               label: 'Crear Estudiante',
@@ -64,6 +65,7 @@ class _StudentPageState extends State<StudentPage> {
                   ),
                   const SizedBox(width: 20),
                   _searchStudent(),
+                  StudentCard()
                 ],
               ),
             ),

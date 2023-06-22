@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors, library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:smartband/src/core/consts/colors.dart';
 
@@ -8,7 +10,7 @@ class SchoolDropdown extends StatefulWidget {
   final Function(School?)
       onSchoolSelected; // Callback para notificar la selección
 
-  SchoolDropdown({required this.onSchoolSelected});
+  const SchoolDropdown({required this.onSchoolSelected});
 
   @override
   _SchoolDropdownState createState() => _SchoolDropdownState();
@@ -57,18 +59,18 @@ class _SchoolDropdownState extends State<SchoolDropdown> {
             // Llamar a la función de callback con el valor seleccionado
             widget.onSchoolSelected(newValue);
           },
-          hint: Text(
+          hint: const Text(
             'Seleccionar un colegio',
             style: TextStyle(color: colorPrimary),
           ),
           dropdownColor: colorSecondary,
-          icon: Icon(Icons.home_outlined),
+          icon: const Icon(Icons.home_outlined),
           items: schools.map<DropdownMenuItem<School>>((School value) {
             return DropdownMenuItem<School>(
               value: value,
               child: Text(
                 value.name ?? '',
-                style: TextStyle(color: colorPrimary),
+                style: const TextStyle(color: colorPrimary),
               ),
             );
           }).toList(),
@@ -96,7 +98,7 @@ class _YourPageState extends State<YourPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Your Page'),
+        title: const Text('Your Page'),
       ),
       body: Column(
         children: [

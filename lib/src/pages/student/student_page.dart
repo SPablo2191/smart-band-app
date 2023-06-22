@@ -66,7 +66,7 @@ class _StudentPageState extends State<StudentPage> {
                   ),
                   const SizedBox(width: 20),
                   _searchStudent(),
-                  StudentCard()
+                  const StudentCard()
                 ],
               ),
             ),

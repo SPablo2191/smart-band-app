@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 class Student {
   int? id;
   // ignore: non_constant_identifier_names
@@ -10,26 +8,27 @@ class Student {
   int? age;
   double? weight;
   double? size;
+  // ignore: non_constant_identifier_names
+  double? waist;
   double? seat_height;
   bool? status;
   DateTime? registerDate;
 
   Student(
-      {
-  this.id,
-  // ignore: non_constant_identifier_names
-  this.DNI,
-  this.name,
-  // ignore: non_constant_identifier_names
-  this.last_name,
-  this.age,
-  this.weight,
-  this.size,
-  // ignore: non_constant_identifier_names
-  this.seat_height,
-  this.status,
-  this.registerDate
-      });
+      {this.id,
+      // ignore: non_constant_identifier_names
+      this.DNI,
+      this.name,
+      // ignore: non_constant_identifier_names
+      this.last_name,
+      this.age,
+      this.weight,
+      this.size,
+      this.waist,
+      // ignore: non_constant_identifier_names
+      this.seat_height,
+      this.status,
+      this.registerDate});
   Student.fromJsonMap(Map<String, dynamic> json) {
     id = json['id'];
     DNI = json['DNI'];
@@ -40,9 +39,9 @@ class Student {
     weight = json['weight'];
     size = json['size'];
     status = json['status'];
+    waist = json['waist'];
     registerDate = json['registerDate'];
   }
-
 
   Map<String, dynamic> getMap() {
     return {
@@ -53,6 +52,7 @@ class Student {
       'seat_height': seat_height,
       'weight': weight,
       'size': size,
+      'waist': waist,
     };
   }
 }

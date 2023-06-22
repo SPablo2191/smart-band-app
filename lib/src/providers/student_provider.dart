@@ -12,7 +12,7 @@ class StudentProvider {
     try {
       final url = Uri.parse('$_url$route');
       String body = jsonEncode(newStudent.getMap());
-      final resp = await http.put(
+      final resp = await http.post(
         url,
         headers: {
           'Content-Type': 'application/json',

@@ -10,6 +10,7 @@ import 'package:smartband/src/pages/start_page.dart';
 import 'package:smartband/src/pages/student/add_student_page.dart';
 
 import '../pages/login_page.dart';
+import '../pages/promotion/add_promotion_page.dart';
 import '../pages/register/register_step_1_page.dart';
 import '../pages/student/student_page.dart';
 
@@ -25,5 +26,6 @@ Map<String, WidgetBuilder> getRoutes() {
     'profile/edit': (context) => const EditProfilePage(),
     'student': (context) => const StudentPage(),
     'student/add': (context) => const StudentAddPage(),
+    'promotion/add': (context) => const PromotionAddPage(),
   };
 }

@@ -1,6 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:smartband/src/models/student_model.dart';
+
 
 import 'class_model.dart';
 
@@ -12,7 +12,7 @@ class Promotion {
   bool? status;
   DateTime? registerDate;
   Class? classroom;
-  List<Student>? students;
+  List<dynamic>? students;
 
   Promotion(
       {this.id,
@@ -32,7 +32,7 @@ class Promotion {
     status = json['status'];
     registerDate = json['registerDate'];
     classroom = Class.fromJsonMap(json['prom_class']);
-    students = Students.fromJsonList(json['students']).items;
+    students = json['students'];
   }
   Map<String, dynamic> getMap() {
     List<Map<String, dynamic>> auxStudents = [];

@@ -34,6 +34,20 @@ class PromotionProvider {
     }
   }
 
+  Future<Promotion> getPromotionById(int? id, String? accessToken) async {
+    final url = Uri.parse('$_url/api/promotion/$id');
+    final resp = await http.get(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $accessToken',
+      },
+    );
+    final decodedData = json.decode(resp.body);
+    final promotion = Promotion.fromJsonMap(decodedData);
+    return promotion;
+  }
+
   Future<List<Promotion>> getPromotions(
       int? school_id, String? accessToken) async {
     try {

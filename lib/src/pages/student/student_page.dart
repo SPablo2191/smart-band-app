@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smartband/src/core/consts/colors.dart';
 import 'package:smartband/src/models/promotion_model.dart';
+import 'package:smartband/src/models/student_model.dart';
 import 'package:smartband/src/providers/promotion_provider.dart';
 import 'package:smartband/src/widgets/appbar_widget.dart';
 import 'package:smartband/src/widgets/bottom_navigation_bar_widget.dart';
@@ -78,6 +79,7 @@ class _StudentPageState extends State<StudentPage> {
                   endIcon: Icons.arrow_drop_down_circle_outlined,
                 ),
               ),
+            if (_showStudents) _getStudents()
           ],
         ),
       ),
@@ -85,6 +87,7 @@ class _StudentPageState extends State<StudentPage> {
     );
   }
 
+  // ignore: unused_element
   Widget _searchStudent() {
     return TextField(
       controller: _student,
@@ -191,7 +194,6 @@ class _StudentPageState extends State<StudentPage> {
   }
 
   _showPromotionSelectionModal(BuildContext context) {
-    print('hola ${_accessToken}');
     showModalBottomSheet<void>(
       context: context,
       builder: (BuildContext context) {
@@ -251,8 +253,7 @@ class _StudentPageState extends State<StudentPage> {
                                       const Icon(Icons.home_outlined),
                                       const SizedBox(width: 8),
                                       Text(
-                                        '${promotion.classroom?.name} \n Año:${promotion.promotion_year?.year}' ??
-                                            '',
+                                        '${promotion.classroom?.name} \n Año:${promotion.promotion_year?.year}',
                                         style: const TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold,
@@ -280,5 +281,48 @@ class _StudentPageState extends State<StudentPage> {
   void _loadData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     _accessToken = prefs.getString('accessToken');
+  }
+
+  _getStudents() {
+    return Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Estudiantes',
+            style: TextStyle(color: colorPrimary, fontSize: 20),
+          ),
+          if (selectedPromotion != null &&
+              selectedPromotion!.students != null &&
+              selectedPromotion!.students!.isNotEmpty)
+            ListView.builder(
+              shrinkWrap: true,
+              itemCount: selectedPromotion!.students!.length,
+              itemBuilder: (BuildContext context, int index) {
+                final studentData =
+                    selectedPromotion!.students![index]['student'];
+                final student = Student(
+                    id: studentData['id'],
+                    name: studentData['name'],
+                    last_name: studentData['last_name'],
+                    DNI: studentData['DNI']);
+                return StudentCard(student: student);
+              },
+            )
+          else
+            Container(
+              alignment: Alignment.center,
+              height: 100,
+              child: const Center(
+                child: Text(
+                  'No hay promociones disponibles',
+                  style: TextStyle(color: colorPrimary, fontSize: 20),
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
   }
 }

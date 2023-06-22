@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:smartband/src/models/student_model.dart';
 
 import '../core/consts/colors.dart';
 
 class StudentCard extends StatelessWidget {
-  const StudentCard({super.key});
+  final Student student;
+  const StudentCard({required this.student, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +25,10 @@ class StudentCard extends StatelessWidget {
             children: <Widget>[
               ListTile(
                 title: Row(
-                  children: const [
+                  children: [
                     Text(
-                      'María Luciana Alvarez Torres',
-                      style: TextStyle(color: colorPrimary),
+                      '${student.name} ${student.last_name}',
+                      style:const TextStyle(color: colorPrimary),
                     ),
                   ],
                 ),
@@ -34,10 +36,10 @@ class StudentCard extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       Text(
-                        'Clase: 4to secundaria',
-                        style: TextStyle(color: colorPrimary),
+                        'DNI: ${student.DNI}',
+                        style:const TextStyle(color: colorPrimary),
                       ),
                     ],
                   ),

@@ -55,4 +55,10 @@ class Student {
       'waist': waist,
     };
   }
+
+  @override
+  String toString() {
+    return name! + '' + last_name! ??
+        ''; // Mostrar el nombre de la escuela como representación en forma de texto
+  }
 }

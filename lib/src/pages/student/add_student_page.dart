@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smartband/src/core/consts/colors.dart';
 import 'package:smartband/src/models/student_model.dart';
+import 'package:smartband/src/providers/student_provider.dart';
 import 'package:smartband/src/widgets/appbar_widget.dart';
 
 import '../../models/school_model.dart';
@@ -101,6 +103,10 @@ class _StudentAddPageState extends State<StudentAddPage> {
         labelText: 'DNI',
         prefixIcon: const Icon(Icons.perm_identity),
       ),
+      inputFormatters: [
+        FilteringTextInputFormatter.digitsOnly, // Permite solo dígitos
+      ],
+      keyboardType: TextInputType.number,
     );
   }
 
@@ -287,7 +293,21 @@ class _StudentAddPageState extends State<StudentAddPage> {
   }
 
   _saveData() async {
-    
+    StudentProvider studentProvider = StudentProvider();
+    final band = await studentProvider.createStudent(_student, _accessToken);
+    if (band) {
+      // ignore: use_build_context_synchronously
+      Navigator.pushNamed(context, 'student');
+    } else {
+      Fluttertoast.showToast(
+          msg: "registro estudiante invalido. Pruebe nuevamente",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 2,
+          backgroundColor: const Color.fromRGBO(29, 53, 87, 1),
+          textColor: const Color.fromRGBO(221, 245, 246, 1),
+          fontSize: 16.0);
+    }
   }
 
   void _getKey() async {

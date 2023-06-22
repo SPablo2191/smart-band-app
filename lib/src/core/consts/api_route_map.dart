@@ -4,5 +4,6 @@ Map<String, String> getApiRoutes() {
     'login': '/api/auth/login',
     'register': '/api/auth/register',
     'teachers':'/api/teachers',
+    'students': '/api/students',
   };
 }

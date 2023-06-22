@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smartband/src/core/consts/colors.dart';
 import 'package:smartband/src/models/student_model.dart';
 import 'package:smartband/src/widgets/appbar_widget.dart';
@@ -16,12 +17,20 @@ class StudentAddPage extends StatefulWidget {
 }
 
 class _StudentAddPageState extends State<StudentAddPage> {
+  String? _accessToken = '';
+  int? _userId = 0;
   final Student _student = Student();
   School? selectedSchool;
   void onSchoolSelected(School? school) {
     setState(() {
       selectedSchool = school;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getKey();
   }
 
   @override
@@ -277,5 +286,13 @@ class _StudentAddPageState extends State<StudentAddPage> {
     );
   }
 
-  _saveData() {}
+  _saveData() async {
+    
+  }
+
+  void _getKey() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _accessToken = prefs.getString('accessToken');
+    _userId = prefs.getInt('userId');
+  }
 }

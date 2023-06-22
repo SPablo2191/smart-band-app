@@ -10,6 +10,8 @@ import '../../core/consts/colors.dart';
 import '../../models/class_model.dart';
 import '../../models/promotion_model.dart';
 import '../../models/school_model.dart';
+import '../../models/student_model.dart';
+import '../../providers/student_provider.dart';
 import '../../widgets/school_dropdown_widget.dart';
 import '../../widgets/ui/ui_button_widget.dart';
 
@@ -23,6 +25,7 @@ class PromotionAddPage extends StatefulWidget {
 class _PromotionAddPageState extends State<PromotionAddPage> {
   School? selectedSchool;
   Class? selectedClass;
+  List<Student> selectedStudents = [];
   Promotion _newPromotion = Promotion();
   String? _accessToken = '';
   DateTime _selectedDate = DateTime.now();
@@ -62,7 +65,16 @@ class _PromotionAddPageState extends State<PromotionAddPage> {
             _getGraduationYear(),
             const SizedBox(height: 10.0),
             _getClassroom(),
-            SizedBox(height: 300.0),
+            const SizedBox(height: 10.0),
+            if (_accessToken != null)
+              Center(
+                child: Text(
+                  'Estudiantes',
+                  style: TextStyle(color: colorPrimary, fontSize: 20),
+                ),
+              ),
+            _getStudents(),
+            // SizedBox(height: 290.0),
             UiButton(
               label: 'Crear Promoción',
               color: colorPrimary,
@@ -142,10 +154,10 @@ class _PromotionAddPageState extends State<PromotionAddPage> {
 
   _saveData() async {
     _newPromotion = Promotion(
-      promotion_year: _selectedDate,
-      school_id: selectedSchool?.id,
-      class_id: selectedClass?.id,
-    );
+        promotion_year: _selectedDate,
+        school_id: selectedSchool?.id,
+        class_id: selectedClass?.id,
+        students: selectedStudents);
     PromotionProvider promotionProvider = PromotionProvider();
     final band =
         await promotionProvider.createPromotion(_newPromotion, _accessToken);
@@ -164,8 +176,70 @@ class _PromotionAddPageState extends State<PromotionAddPage> {
     }
   }
 
-  void _getKey() async {
+  Future<String> _getKey() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     _accessToken = prefs.getString('accessToken');
+    return _accessToken ?? '';
+  }
+
+  _getStudents() {
+    StudentProvider studentProvider = StudentProvider();
+    return FutureBuilder<List<Student>>(
+      future: _getKey()
+          .then((accessToken) => studentProvider.getStudents(accessToken)),
+      builder: (BuildContext context, AsyncSnapshot<List<Student>> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return CircularProgressIndicator();
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else if (snapshot.hasData) {
+          final students = snapshot.data!;
+
+          return SizedBox(
+            height: 200,
+            child: ListView.builder(
+              itemCount: students.length,
+              itemBuilder: (BuildContext context, int index) {
+                final student = students[index];
+
+                return Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        color: student.isSelected ? colorSecondary : colorLight,
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                      color: colorSecondary),
+                  child: CheckboxListTile(
+                    title: Text(
+                      '${student.last_name}, ${student.name} \n DNI: ${student.DNI}' ??
+                          '',
+                      style: TextStyle(color: colorPrimary),
+                    ),
+                    value: student.isSelected,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        if (value != null) {
+                          student.isSelected = value;
+
+                          if (value) {
+                            selectedStudents.add(student);
+                            print(selectedStudents);
+                          } else {
+                            selectedStudents.remove(student);
+                          }
+                        }
+                      });
+                    },
+                  ),
+                );
+              },
+            ),
+          );
+        } else {
+          return Text('No hay datos disponibles');
+        }
+      },
+    );
   }
 }

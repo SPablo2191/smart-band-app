@@ -14,7 +14,7 @@ class Student {
   double? seat_height;
   bool? status;
   DateTime? registerDate;
-
+  bool isSelected = false;
   Student(
       {this.id,
       // ignore: non_constant_identifier_names
@@ -29,7 +29,8 @@ class Student {
       // ignore: non_constant_identifier_names
       this.seat_height,
       this.status,
-      this.registerDate});
+      this.registerDate,
+      this.isSelected = false});
   Student.fromJsonMap(Map<String, dynamic> json) {
     id = json['id'];
     DNI = json['DNI'];
@@ -46,6 +47,7 @@ class Student {
 
   Map<String, dynamic> getMap() {
     return {
+      'id': id,
       'name': name,
       'last_name': last_name,
       'DNI': DNI,
@@ -60,5 +62,17 @@ class Student {
   @override
   String toString() {
     return '${name!}${last_name!}'; // Mostrar el nombre de la escuela como representación en forma de texto
+  }
+}
+
+class Students {
+  List<Student> items = [];
+  Students();
+  Students.fromJsonList(List<dynamic> jsonList) {
+    // if (jsonList == null) return;
+    for (var element in jsonList) {
+      final student = Student.fromJsonMap(element);
+      items.add(student);
+    }
   }
 }

@@ -37,7 +37,7 @@ class _PromotionPageState extends State<PromotionPage> {
               textColor: colorPrimary,
               context: context,
               onPressedCallback: () =>
-                  {Navigator.pushNamed(context, 'student/add')},
+                  {Navigator.pushNamed(context, 'promotion/add')},
               startIcon: Icons.people_alt_outlined,
               bottom: 10,
               endIcon: Icons.add_box_outlined,

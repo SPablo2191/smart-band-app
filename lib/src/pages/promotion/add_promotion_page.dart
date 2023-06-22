@@ -67,7 +67,7 @@ class _PromotionAddPageState extends State<PromotionAddPage> {
             _getClassroom(),
             const SizedBox(height: 10.0),
             if (_accessToken != null)
-              Center(
+              const Center(
                 child: Text(
                   'Estudiantes',
                   style: TextStyle(color: colorPrimary, fontSize: 20),
@@ -132,7 +132,7 @@ class _PromotionAddPageState extends State<PromotionAddPage> {
               firstDate: DateTime(DateTime.now().year - 100, 1),
               lastDate: DateTime(DateTime.now().year + 100, 1),
               initialDate: DateTime.now(),
-              selectedDate: _newPromotion?.promotion_year ?? DateTime.now(),
+              selectedDate: _newPromotion.promotion_year ?? DateTime.now(),
               onChanged: (DateTime dateTime) {
                 setState(() {
                   _selectedDate = dateTime;
@@ -189,7 +189,7 @@ class _PromotionAddPageState extends State<PromotionAddPage> {
           .then((accessToken) => studentProvider.getStudents(accessToken)),
       builder: (BuildContext context, AsyncSnapshot<List<Student>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else if (snapshot.hasData) {
@@ -212,9 +212,8 @@ class _PromotionAddPageState extends State<PromotionAddPage> {
                       color: colorSecondary),
                   child: CheckboxListTile(
                     title: Text(
-                      '${student.last_name}, ${student.name} \n DNI: ${student.DNI}' ??
-                          '',
-                      style: TextStyle(color: colorPrimary),
+                      '${student.last_name}, ${student.name} \n DNI: ${student.DNI}',
+                      style: const TextStyle(color: colorPrimary),
                     ),
                     value: student.isSelected,
                     onChanged: (bool? value) {
@@ -224,7 +223,6 @@ class _PromotionAddPageState extends State<PromotionAddPage> {
 
                           if (value) {
                             selectedStudents.add(student);
-                            print(selectedStudents);
                           } else {
                             selectedStudents.remove(student);
                           }
@@ -237,7 +235,7 @@ class _PromotionAddPageState extends State<PromotionAddPage> {
             ),
           );
         } else {
-          return Text('No hay datos disponibles');
+          return const Text('No hay datos disponibles');
         }
       },
     );

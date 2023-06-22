@@ -176,6 +176,7 @@ class _PromotionPageState extends State<PromotionPage> {
                   'Promociones',
                   style: TextStyle(color: colorPrimary, fontSize: 20),
                 ),
+                // ignore: unnecessary_null_comparison
                 if (promotions != null && promotions.isNotEmpty)
                   ListView.builder(
                     shrinkWrap: true,

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smartband/src/core/consts/colors.dart';
+import 'package:smartband/src/models/promotion_model.dart';
+import 'package:smartband/src/providers/promotion_provider.dart';
 import 'package:smartband/src/widgets/appbar_widget.dart';
 import 'package:smartband/src/widgets/bottom_navigation_bar_widget.dart';
 import 'package:smartband/src/widgets/student_card_widget.dart';
@@ -17,9 +20,18 @@ class StudentPage extends StatefulWidget {
 
 class _StudentPageState extends State<StudentPage> {
   final _student = TextEditingController();
+  bool _showPromotions = false;
   bool _showStudents = false;
+  String? _accessToken = '';
   final SchoolProvider schoolProvider = SchoolProvider();
+  final PromotionProvider promotionProvider = PromotionProvider();
   School? selectedSchool;
+  Promotion? selectedPromotion;
+  @override
+  void initState() {
+    super.initState();
+    _loadData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,23 +65,19 @@ class _StudentPageState extends State<StudentPage> {
               startIcon: Icons.home_outlined,
               endIcon: Icons.arrow_drop_down_circle_outlined,
             ),
-            Visibility(
-              visible: _showStudents,
-              child: Column(
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.only(top: 12.0, bottom: 12.0),
-                    child: Text(
-                      'Estudiantes',
-                      style: TextStyle(color: colorPrimary, fontSize: 20),
-                    ),
-                  ),
-                  const SizedBox(width: 20),
-                  _searchStudent(),
-                  const StudentCard()
-                ],
+            if (_showPromotions)
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: UiButton(
+                  label: 'Seleccionar una promoción',
+                  color: colorSecondary,
+                  textColor: colorPrimary,
+                  context: context,
+                  onPressedCallback: () =>
+                      {_showPromotionSelectionModal(context)},
+                  endIcon: Icons.arrow_drop_down_circle_outlined,
+                ),
               ),
-            ),
           ],
         ),
       ),
@@ -139,7 +147,7 @@ class _StudentPageState extends State<StudentPage> {
                             onTap: () {
                               setState(() {
                                 selectedSchool = school;
-                                _showStudents =
+                                _showPromotions =
                                     true; // Guardar la escuela seleccionada
                               });
                               Navigator.pop(context); // Cerrar el modal
@@ -180,5 +188,97 @@ class _StudentPageState extends State<StudentPage> {
         );
       },
     );
+  }
+
+  _showPromotionSelectionModal(BuildContext context) {
+    print('hola ${_accessToken}');
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 300,
+          color: Colors.white,
+          child: Column(
+            children: [
+              const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Text(
+                  'Seleccionar Promoción',
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: colorPrimary),
+                ),
+              ),
+              Expanded(
+                child: FutureBuilder<List<Promotion>>(
+                  future: promotionProvider.getPromotions(selectedSchool?.id,
+                      _accessToken), // Obtener la lista de escuelas desde el proveedor
+                  builder: (BuildContext context,
+                      AsyncSnapshot<List<Promotion>> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else if (snapshot.hasError) {
+                      return const Center(
+                          child: Text('Error al cargar las promociones'));
+                    } else {
+                      final List<Promotion> promotions = snapshot.data ?? [];
+
+                      return ListView.builder(
+                        itemCount: promotions.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final Promotion promotion = promotions[index];
+
+                          return GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                selectedPromotion = promotion;
+                                _showStudents =
+                                    true; // Guardar la escuela seleccionada
+                              });
+                              Navigator.pop(context); // Cerrar el modal
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 8.0),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: colorSecondary,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: ListTile(
+                                  title: Row(
+                                    children: [
+                                      const Icon(Icons.home_outlined),
+                                      const SizedBox(width: 8),
+                                      Text(
+                                        '${promotion.classroom?.name} \n Año:${promotion.promotion_year?.year}' ??
+                                            '',
+                                        style: const TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                            color: colorPrimary),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    }
+                  },
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _loadData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _accessToken = prefs.getString('accessToken');
   }
 }

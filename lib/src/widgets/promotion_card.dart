@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:smartband/src/core/consts/colors.dart';
 import 'package:smartband/src/models/promotion_model.dart';
 
-import '../models/test_model.dart';
-
 class PromotionCard extends StatelessWidget {
   final Promotion promotion;
   const PromotionCard({required this.promotion, super.key});
@@ -11,7 +9,7 @@ class PromotionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 5, top: 5),
+      padding: const EdgeInsets.only(bottom: 5, top: 5),
       child: Card(
         color: colorLight,
         child: Column(

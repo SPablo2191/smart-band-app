@@ -10,7 +10,6 @@ class StudentProvider {
 
   Future<bool> createStudent(Student newStudent, String? accessToken) async {
     try {
-      print('holaa $accessToken');
       final url = Uri.parse('$_url$route');
       String body = jsonEncode(newStudent.getMap());
       final resp = await http.post(
@@ -35,7 +34,6 @@ class StudentProvider {
   Future<List<Student>> getStudents(String? accessToken) async {
     try {
       final url = Uri.parse('$_url$route');
-      print('holaaaa $url');
       final resp = await http.get(
         url,
         headers: {

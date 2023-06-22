@@ -34,7 +34,7 @@ class _StudentPageState extends State<StudentPage> {
         child: Column(
           children: [
             UiButton(
-              label: 'Crear Estudiante',
+              label: 'Registrar Estudiante',
               color: colorSecondary,
               textColor: colorPrimary,
               context: context,

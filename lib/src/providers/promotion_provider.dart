@@ -12,8 +12,9 @@ class PromotionProvider {
   Future<bool> createPromotion(
       Promotion newPromotion, String? accessToken) async {
     try {
-      final url = Uri.parse('$_url$route');
+      final url = Uri.parse('$_url$route/${newPromotion.school_id}');
       print(url);
+      print(accessToken);
       String body = jsonEncode(newPromotion.getMap());
       print(body);
       final resp = await http.post(

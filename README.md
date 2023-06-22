@@ -1,16 +1,29 @@
-# smartband
+# Vital 👣
 
-A new Flutter project.
+## Introducción:
 
-## Getting Started
+Bievenido al aplicativo movil para la materia Tecnologias Moviles.
 
-This project is a starting point for a Flutter application.
+## Tabla de contenidos:
 
-A few resources to get you started if this is your first Flutter project:
+- [Autor](#autor👀)
+- [Tecnologias](#tecnologias-👨‍💻)
+- [Entornos Compatibles](#entornos-compatibles-💻)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Autor👀
+
+- [Pablo Sandoval](https://github.com/SPablo2191)
+
+## Tecnologias 👨‍💻
+
+![Flutter](https://img.shields.io/badge/Flutter-3.11.2-brightgreen.svg)
+![flutter_dotenv](https://img.shields.io/badge/flutter_dotenv-5.0.2-green.svg)
+![multi_select_flutter](https://img.shields.io/badge/multi_select_flutter-4.1.3-blue.svg)
+![fluttertoast](https://img.shields.io/badge/fluttertoast-8.2.2-orange.svg)
+
+## Entornos Compatibles
+
+![Android](https://img.shields.io/badge/Androidcompatible-green)
+![IOS](https://img.shields.io/badge/IOS-compatible-green)
+![Chrome](https://img.shields.io/badge/Chrome-compatible-green)

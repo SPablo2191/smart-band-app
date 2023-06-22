@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smartband/src/core/consts/colors.dart';
-import 'package:smartband/src/models/promotion_model.dart';
+// import 'package:smartband/src/models/promotion_model.dart';
 import 'package:smartband/src/pages/start_page.dart';
 import 'package:smartband/src/widgets/home_button_widget.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';

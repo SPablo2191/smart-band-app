@@ -80,39 +80,3 @@ class _SchoolDropdownState extends State<SchoolDropdown> {
   }
 }
 
-class YourPage extends StatefulWidget {
-  @override
-  _YourPageState createState() => _YourPageState();
-}
-
-class _YourPageState extends State<YourPage> {
-  School? selectedSchool;
-
-  void onSchoolSelected(School? school) {
-    setState(() {
-      selectedSchool = school;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Your Page'),
-      ),
-      body: Column(
-        children: [
-          SchoolDropdown(onSchoolSelected: onSchoolSelected),
-          ElevatedButton(
-            onPressed: () {
-              // Utilizar el valor seleccionado
-              if (selectedSchool != null) {
-              } else {}
-            },
-            child: const Text('Guardar'),
-          ),
-        ],
-      ),
-    );
-  }
-}

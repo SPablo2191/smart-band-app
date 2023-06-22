@@ -3,7 +3,8 @@ Map<String, String> getApiRoutes() {
     'schools': '/api/schools',
     'login': '/api/auth/login',
     'register': '/api/auth/register',
-    'teachers':'/api/teachers',
+    'teachers': '/api/teachers',
     'students': '/api/students',
+    'classes': '/api/classes',
   };
 }

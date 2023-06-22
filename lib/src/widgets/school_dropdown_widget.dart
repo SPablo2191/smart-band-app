@@ -5,6 +5,11 @@ import '../models/school_model.dart';
 import '../providers/school_provider.dart';
 
 class SchoolDropdown extends StatefulWidget {
+  final Function(School?)
+      onSchoolSelected; // Callback para notificar la selección
+
+  SchoolDropdown({required this.onSchoolSelected});
+
   @override
   _SchoolDropdownState createState() => _SchoolDropdownState();
 }
@@ -21,8 +26,7 @@ class _SchoolDropdownState extends State<SchoolDropdown> {
   }
 
   void loadSchools() async {
-    List<School> fetchedSchools = await schoolProvider
-        .getSchools(); // Obtener la lista de colegios desde el provider
+    List<School> fetchedSchools = await schoolProvider.getSchools();
 
     setState(() {
       schools = fetchedSchools;
@@ -49,13 +53,16 @@ class _SchoolDropdownState extends State<SchoolDropdown> {
             setState(() {
               selectedSchool = newValue;
             });
+
+            // Llamar a la función de callback con el valor seleccionado
+            widget.onSchoolSelected(newValue);
           },
           hint: Text(
             'Seleccionar un colegio',
             style: TextStyle(color: colorPrimary),
-          ), // Placeholder
-          dropdownColor: colorSecondary, // Fondo celeste
-          icon: Icon(Icons.home_outlined), // Icono al inicio
+          ),
+          dropdownColor: colorSecondary,
+          icon: Icon(Icons.home_outlined),
           items: schools.map<DropdownMenuItem<School>>((School value) {
             return DropdownMenuItem<School>(
               value: value,
@@ -66,6 +73,46 @@ class _SchoolDropdownState extends State<SchoolDropdown> {
             );
           }).toList(),
         ),
+      ),
+    );
+  }
+}
+
+class YourPage extends StatefulWidget {
+  @override
+  _YourPageState createState() => _YourPageState();
+}
+
+class _YourPageState extends State<YourPage> {
+  School? selectedSchool;
+
+  void onSchoolSelected(School? school) {
+    setState(() {
+      selectedSchool = school;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Your Page'),
+      ),
+      body: Column(
+        children: [
+          SchoolDropdown(onSchoolSelected: onSchoolSelected),
+          ElevatedButton(
+            onPressed: () {
+              // Utilizar el valor seleccionado
+              if (selectedSchool != null) {
+                print('Escuela seleccionada: ${selectedSchool!.name}');
+              } else {
+                print('Ninguna escuela seleccionada');
+              }
+            },
+            child: Text('Guardar'),
+          ),
+        ],
       ),
     );
   }

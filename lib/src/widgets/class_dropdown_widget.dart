@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:smartband/src/core/consts/colors.dart';
-import 'package:smartband/src/models/class_model.dart';
+import 'package:vital/src/core/consts/colors.dart';
+import 'package:vital/src/models/class_model.dart';
 
 import '../providers/class_provider.dart';
 

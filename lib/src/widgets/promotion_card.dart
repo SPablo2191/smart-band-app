@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:smartband/src/core/consts/colors.dart';
-import 'package:smartband/src/models/promotion_model.dart';
+import 'package:vital/src/core/consts/colors.dart';
+import 'package:vital/src/models/promotion_model.dart';
 
 class PromotionCard extends StatelessWidget {
   final Promotion promotion;

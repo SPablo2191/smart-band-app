@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:smartband/src/core/consts/colors.dart';
-import 'package:smartband/src/models/student_model.dart';
-import 'package:smartband/src/providers/student_provider.dart';
-import 'package:smartband/src/widgets/appbar_widget.dart';
+import 'package:vital/src/core/consts/colors.dart';
+import 'package:vital/src/models/student_model.dart';
+import 'package:vital/src/providers/student_provider.dart';
+import 'package:vital/src/widgets/appbar_widget.dart';
 
 import '../../models/school_model.dart';
 import '../../widgets/bottom_navigation_bar_widget.dart';

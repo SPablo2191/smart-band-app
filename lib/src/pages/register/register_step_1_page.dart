@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:smartband/src/models/teacher_model.dart';
-import 'package:smartband/src/pages/register/register_step_2_page.dart';
-import 'package:smartband/src/widgets/appbar_widget.dart';
+import 'package:vital/src/models/teacher_model.dart';
+import 'package:vital/src/pages/register/register_step_2_page.dart';
+import 'package:vital/src/widgets/appbar_widget.dart';
 
 class RegisterStep1Page extends StatefulWidget {
   const RegisterStep1Page({super.key});

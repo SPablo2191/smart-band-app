@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:smartband/src/providers/promotion_provider.dart';
-import 'package:smartband/src/widgets/appbar_widget.dart';
-import 'package:smartband/src/widgets/bottom_navigation_bar_widget.dart';
-import 'package:smartband/src/widgets/promotion_card.dart';
+import 'package:vital/src/providers/promotion_provider.dart';
+import 'package:vital/src/widgets/appbar_widget.dart';
+import 'package:vital/src/widgets/bottom_navigation_bar_widget.dart';
+import 'package:vital/src/widgets/promotion_card.dart';
 
 import '../../core/consts/colors.dart';
 import '../../models/promotion_model.dart';

@@ -55,6 +55,7 @@ class _PromotionAddPageState extends State<PromotionAddPage> {
         title: 'Crear Promoción',
         centerTitle: false,
         showBackButton: true,
+        path: 'promotion',
       ),
       body: Padding(
         padding: const EdgeInsets.only(right: 8.0, left: 8.0, top: 15),

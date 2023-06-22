@@ -38,7 +38,11 @@ class _StudentAddPageState extends State<StudentAddPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(
-          title: 'Añadir Estudiante', showBackButton: true, centerTitle: false),
+        title: 'Añadir Estudiante',
+        showBackButton: true,
+        centerTitle: false,
+        path: 'student',
+      ),
       body: Padding(
         padding: const EdgeInsets.only(
             top: 25.0, right: 8.0, left: 8.0, bottom: 8.0),

@@ -40,6 +40,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           title: 'Mi Perfil',
           showBackButton: true,
           centerTitle: false,
+          path: 'profile',
         ),
         body: Padding(
           padding: const EdgeInsets.only(top: 20.0, right: 15, left: 15),

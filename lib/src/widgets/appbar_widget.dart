@@ -3,6 +3,7 @@ import 'package:smartband/src/core/consts/colors.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final String path;
   final bool showBackButton;
   final bool centerTitle;
 
@@ -13,6 +14,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.title,
     this.showBackButton = false,
     this.centerTitle = true,
+    this.path = 'home',
     Key? key,
   })  : preferredSize = const Size.fromHeight(kToolbarHeight),
         super(key: key);
@@ -35,7 +37,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               color: colorPrimary,
             ),
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.pushNamed(context, path);
             },
           ),
       ],

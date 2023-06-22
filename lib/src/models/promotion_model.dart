@@ -27,9 +27,10 @@ class Promotion {
   }
   Map<String, dynamic> getMap() {
     return {
-      'promotion_year': promotion_year,
+      'promotion_year': promotion_year.toString(),
       'id': id,
       'class_id': class_id,
+      'school_id': school_id,
     };
   }
 }

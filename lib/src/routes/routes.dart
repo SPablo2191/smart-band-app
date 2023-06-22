@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:smartband/src/pages/home_page.dart';
 import 'package:smartband/src/pages/profile/edit_profile_page.dart';
 import 'package:smartband/src/pages/profile/profile_page.dart';
-import 'package:smartband/src/pages/promotion_page.dart';
+import 'package:smartband/src/pages/promotion/promotion_page.dart';
 import 'package:smartband/src/pages/register/register_step_2_page.dart';
 import 'package:smartband/src/pages/start_page.dart';
 import 'package:smartband/src/pages/student/add_student_page.dart';

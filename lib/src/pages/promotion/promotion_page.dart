@@ -54,22 +54,22 @@ class _PromotionPageState extends State<PromotionPage> {
             Visibility(
               visible: _showPromotions,
               child: Column(
-                children: [
-                  const Padding(
+                children: const [
+                  Padding(
                     padding: EdgeInsets.only(top: 12.0, bottom: 12.0),
                     child: Text(
                       'Promociones',
                       style: TextStyle(color: colorPrimary, fontSize: 20),
                     ),
                   ),
-                  const SizedBox(width: 20),
+                  SizedBox(width: 20),
                 ],
               ),
             ),
           ],
         ),
       ),
-      bottomNavigationBar: CustomBottomNavigationBar(),
+      bottomNavigationBar: const CustomBottomNavigationBar(),
     );
   }
 

@@ -20,7 +20,6 @@ class StudentAddPage extends StatefulWidget {
 
 class _StudentAddPageState extends State<StudentAddPage> {
   String? _accessToken = '';
-  int? _userId = 0;
   final Student _student = Student();
   School? selectedSchool;
   void onSchoolSelected(School? school) {
@@ -313,6 +312,5 @@ class _StudentAddPageState extends State<StudentAddPage> {
   void _getKey() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     _accessToken = prefs.getString('accessToken');
-    _userId = prefs.getInt('userId');
   }
 }

@@ -107,10 +107,7 @@ class _YourPageState extends State<YourPage> {
             onPressed: () {
               // Utilizar el valor seleccionado
               if (selectedSchool != null) {
-                print('Escuela seleccionada: ${selectedSchool!.name}');
-              } else {
-                print('Ninguna escuela seleccionada');
-              }
+              } else {}
             },
             child: const Text('Guardar'),
           ),

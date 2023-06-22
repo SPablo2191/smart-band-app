@@ -10,6 +10,7 @@ class Student {
   double? size;
   // ignore: non_constant_identifier_names
   double? waist;
+  // ignore: non_constant_identifier_names
   double? seat_height;
   bool? status;
   DateTime? registerDate;
@@ -58,7 +59,6 @@ class Student {
 
   @override
   String toString() {
-    return name! + '' + last_name! ??
-        ''; // Mostrar el nombre de la escuela como representación en forma de texto
+    return '${name!}${last_name!}'; // Mostrar el nombre de la escuela como representación en forma de texto
   }
 }

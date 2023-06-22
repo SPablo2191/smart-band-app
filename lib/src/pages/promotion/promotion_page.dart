@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:smartband/src/providers/promotion_provider.dart';
 import 'package:smartband/src/widgets/appbar_widget.dart';
 import 'package:smartband/src/widgets/bottom_navigation_bar_widget.dart';
+import 'package:smartband/src/widgets/promotion_card.dart';
 
 import '../../core/consts/colors.dart';
+import '../../models/promotion_model.dart';
 import '../../models/school_model.dart';
 import '../../providers/school_provider.dart';
 import '../../widgets/ui/ui_button_widget.dart';
@@ -16,8 +20,16 @@ class PromotionPage extends StatefulWidget {
 
 class _PromotionPageState extends State<PromotionPage> {
   bool _showPromotions = false;
+  String? _accessToken = '';
   final SchoolProvider schoolProvider = SchoolProvider();
   School? selectedSchool;
+
+  @override
+  void initState() {
+    super.initState();
+    _getKey();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,21 +63,7 @@ class _PromotionPageState extends State<PromotionPage> {
               startIcon: Icons.home_outlined,
               endIcon: Icons.arrow_drop_down_circle_outlined,
             ),
-            Visibility(
-              visible: _showPromotions,
-              child: Column(
-                children: const [
-                  Padding(
-                    padding: EdgeInsets.only(top: 12.0, bottom: 12.0),
-                    child: Text(
-                      'Promociones',
-                      style: TextStyle(color: colorPrimary, fontSize: 20),
-                    ),
-                  ),
-                  SizedBox(width: 20),
-                ],
-              ),
-            ),
+            if (_showPromotions) _getPromotions(),
           ],
         ),
       ),
@@ -156,5 +154,60 @@ class _PromotionPageState extends State<PromotionPage> {
         );
       },
     );
+  }
+
+  _getPromotions() {
+    PromotionProvider promotionProvider = PromotionProvider();
+    return FutureBuilder<List<Promotion>>(
+      future: promotionProvider.getPromotions(selectedSchool?.id, _accessToken),
+      builder: (BuildContext context, AsyncSnapshot<List<Promotion>> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator();
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else if (snapshot.hasData) {
+          final promotions = snapshot.data!;
+          return Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Promociones',
+                  style: TextStyle(color: colorPrimary, fontSize: 20),
+                ),
+                if (promotions != null && promotions.isNotEmpty)
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: promotions.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final promotion = promotions[index];
+                      return PromotionCard(promotion: promotion);
+                    },
+                  )
+                else
+                  Container(
+                    alignment: Alignment.center,
+                    height: 100,
+                    child: const Center(
+                      child: Text(
+                        'No hay promociones disponibles',
+                        style: TextStyle(color: colorPrimary, fontSize: 20),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          );
+        } else {
+          return Text('No hay datos disponibles ${snapshot.data}');
+        }
+      },
+    );
+  }
+
+  void _getKey() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _accessToken = prefs.getString('accessToken');
   }
 }

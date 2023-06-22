@@ -55,7 +55,7 @@ class _PromotionAddPageState extends State<PromotionAddPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.only(right: 8.0, left: 8.0, top: 15),
-        child: ListView(
+        child: Column(
           children: [
             SchoolDropdown(onSchoolSelected: onSchoolSelected),
             const SizedBox(height: 10.0),

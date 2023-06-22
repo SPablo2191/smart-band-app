@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
@@ -34,6 +36,27 @@ class PromotionProvider {
     } catch (e) {
       print(e);
       return false;
+    }
+  }
+
+  Future<List<Promotion>> getPromotions(
+      int? school_id, String? accessToken) async {
+    try {
+      final url = Uri.parse('$_url$route/$school_id');
+      final resp = await http.get(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $accessToken',
+        },
+      );
+      final decodedData = json.decode(resp.body);
+      print(decodedData);
+      final promotions = Promotions.fromJsonList(decodedData);
+      return promotions.items;
+    } catch (e) {
+      print('holaaa $e');
+      return [];
     }
   }
 }

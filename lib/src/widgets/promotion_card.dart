@@ -10,8 +10,8 @@ class PromotionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 100,
+    return Padding(
+      padding: EdgeInsets.only(bottom: 5, top: 5),
       child: Card(
         color: colorLight,
         child: Column(
@@ -19,10 +19,10 @@ class PromotionCard extends StatelessWidget {
           children: <Widget>[
             ListTile(
               title: Row(
-                children: const [
+                children: [
                   Text(
-                    'Año: 2024',
-                    style: TextStyle(color: colorPrimary),
+                    'Año: ${promotion.promotion_year?.year}',
+                    style: const TextStyle(color: colorPrimary),
                   ),
                 ],
               ),
@@ -30,15 +30,15 @@ class PromotionCard extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 8.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     Text(
-                      'Clase: 4to secundaria',
-                      style: TextStyle(color: colorPrimary),
+                      'Clase: ${promotion.classroom?.name}',
+                      style: const TextStyle(color: colorPrimary),
                     ),
-                    Text(
-                      'Cantidad de Alumnos: 30',
-                      style: TextStyle(color: colorPrimary),
-                    )
+                    // Text(
+                    //   'Cantidad de Alumnos: 30',
+                    //   style: TextStyle(color: colorPrimary),
+                    // )
                   ],
                 ),
               ),

@@ -45,7 +45,7 @@ class _SchoolDropdownState extends State<SchoolDropdown> {
             color: colorPrimary,
             width: 1,
           ),
-          borderRadius: BorderRadius.circular(10.0),
+          borderRadius: BorderRadius.circular(20.0),
         ),
         child: DropdownButton<School>(
           value: selectedSchool,
@@ -110,7 +110,7 @@ class _YourPageState extends State<YourPage> {
                 print('Ninguna escuela seleccionada');
               }
             },
-            child: Text('Guardar'),
+            child: const Text('Guardar'),
           ),
         ],
       ),

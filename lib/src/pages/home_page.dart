@@ -143,7 +143,7 @@ class _HomePageState extends State<HomePage> {
                     buttonIconColor: colorPrimary,
                     buttonIcon: Icons.add_chart_rounded,
                     buttonLabelColor: colorPrimary,
-                    path: '',
+                    path: 'test/add',
                     buttonLabel: 'Crear Evaluaciones'),
                 HomeButton(
                     buttonColor: colorSecondary,

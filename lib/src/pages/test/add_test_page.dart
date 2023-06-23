@@ -38,23 +38,26 @@ class _TestAddPageState extends State<TestAddPage> {
     return Scaffold(
       appBar: const CustomAppBar(
           title: 'Crear Evaluación', centerTitle: false, showBackButton: true),
-      body: ListView(
-        children: [
-          UiButton(
-            label: 'Seleccionar un colegio',
-            color: colorSecondary,
-            textColor: colorPrimary,
-            context: context,
-            onPressedCallback: () => {_showSchoolSelectionModal(context)},
-            startIcon: Icons.home_outlined,
-            endIcon: Icons.arrow_drop_down_circle_outlined,
-          ),
-          if (_showPromotions)
-            PromotionDropdown(
-                accessToken: _accessToken ?? "",
-                schoolId: selectedSchool!.id!,
-                onPromotionSelected: onPromotionSelected)
-        ],
+      body: Padding(
+        padding: const EdgeInsets.only(top: 15.0, left: 8, right: 8),
+        child: ListView(
+          children: [
+            UiButton(
+              label: 'Seleccionar un colegio',
+              color: colorSecondary,
+              textColor: colorPrimary,
+              context: context,
+              onPressedCallback: () => {_showSchoolSelectionModal(context)},
+              startIcon: Icons.home_outlined,
+              endIcon: Icons.arrow_drop_down_circle_outlined,
+            ),
+            if (_showPromotions)
+              PromotionDropdown(
+                  accessToken: _accessToken ?? "",
+                  schoolId: selectedSchool!.id!,
+                  onPromotionSelected: onPromotionSelected)
+          ],
+        ),
       ),
       bottomNavigationBar: const CustomBottomNavigationBar(),
     );

@@ -7,6 +7,7 @@ class Test {
   int? teacher_id;
   bool? status;
   DateTime? registerDate;
+  List<dynamic>? exercises;
 
   Test(
       {this.id,
@@ -14,7 +15,8 @@ class Test {
       this.promotion_id,
       this.status_test_id,
       this.teacher_id,
-      this.registerDate});
+      this.registerDate,
+      this.exercises});
   Test.fromJsonMap(Map<String, dynamic> json) {
     id = json['id'];
     promotion_id = json['promotion_id'];
@@ -22,13 +24,19 @@ class Test {
     teacher_id = json['teacher_id'];
     status = json['status'];
     registerDate = json['registerDate'];
+    exercises = json['exercises'];
   }
 
   Map<String, dynamic> getMap() {
+    List<Map<String, dynamic>> auxExercises = [];
+    for (var exercise in exercises!) {
+      auxExercises.add(exercise.getMap());
+    }
     return {
       'promotion_id': promotion_id,
       'status_test_id': status_test_id,
       'teacher_id': teacher_id,
+      'exercises': auxExercises,
     };
   }
 }

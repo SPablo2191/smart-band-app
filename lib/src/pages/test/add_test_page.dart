@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vital/src/models/promotion_model.dart';
 import 'package:vital/src/widgets/appbar_widget.dart';
 import 'package:vital/src/widgets/bottom_navigation_bar_widget.dart';
+import 'package:vital/src/widgets/promotion_dropdown_widget.dart';
 
 import '../../core/consts/colors.dart';
 import '../../models/school_model.dart';
@@ -22,6 +25,14 @@ class _TestAddPageState extends State<TestAddPage> {
   final SchoolProvider schoolProvider = SchoolProvider();
   final PromotionProvider promotionProvider = PromotionProvider();
   School? selectedSchool;
+  Promotion? selectedPromotion;
+  List<Promotion> promotions = [];
+  @override
+  void initState() {
+    super.initState();
+    _loadData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,6 +49,11 @@ class _TestAddPageState extends State<TestAddPage> {
             startIcon: Icons.home_outlined,
             endIcon: Icons.arrow_drop_down_circle_outlined,
           ),
+          if (_showPromotions)
+            PromotionDropdown(
+                accessToken: _accessToken ?? "",
+                schoolId: selectedSchool!.id!,
+                onPromotionSelected: onPromotionSelected)
         ],
       ),
       bottomNavigationBar: const CustomBottomNavigationBar(),
@@ -127,5 +143,16 @@ class _TestAddPageState extends State<TestAddPage> {
         );
       },
     );
+  }
+
+  void _loadData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _accessToken = prefs.getString('accessToken');
+  }
+
+  onPromotionSelected(Promotion? promotion) {
+    setState(() {
+      selectedPromotion = promotion;
+    });
   }
 }

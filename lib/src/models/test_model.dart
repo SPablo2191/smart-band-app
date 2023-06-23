@@ -1,63 +1,45 @@
+// ignore_for_file: non_constant_identifier_names
+
 class Test {
   int? id;
-  // ignore: non_constant_identifier_names
-  String? DNI;
-  String? name;
-  // ignore: non_constant_identifier_names
-  String? last_name;
-  String? password;
-  String? email;
-  List<dynamic>? schools;
-  List<dynamic>? tests;
+  int? status_test_id;
+  int? promotion_id;
+  int? teacher_id;
   bool? status;
   DateTime? registerDate;
 
   Test(
       {this.id,
-      this.name,
-      // ignore: non_constant_identifier_names
-      this.last_name,
-      // ignore: non_constant_identifier_names
-      this.DNI,
-      this.email,
-      this.password,
-      this.schools,
       this.status,
-      this.registerDate,
-      this.tests});
+      this.promotion_id,
+      this.status_test_id,
+      this.teacher_id,
+      this.registerDate});
   Test.fromJsonMap(Map<String, dynamic> json) {
     id = json['id'];
-    name = json['name'];
-    last_name = json['last_name'];
-    DNI = json['DNI'];
-    email = json['email'];
-    password = json['password'];
-    schools = json['schools'];
+    promotion_id = json['promotion_id'];
+    status_test_id = json['status_test_id'];
+    teacher_id = json['teacher_id'];
     status = json['status'];
     registerDate = json['registerDate'];
-    tests = json['tests'];
-  }
-  isValid() {
-    return !(name == null &&
-        last_name == null &&
-        DNI == null &&
-        email == null &&
-        password == null &&
-        schools == null);
   }
 
   Map<String, dynamic> getMap() {
-    List<Map<String, dynamic>> auxSchools = [];
-    for (var school in schools!) {
-      auxSchools.add(school.getMap());
-    }
     return {
-      'name': name,
-      'last_name': last_name,
-      'DNI': DNI,
-      'email': email,
-      'password': password,
-      'schools': auxSchools,
+      'promotion_id': promotion_id,
+      'status_test_id': status_test_id,
+      'teacher_id': teacher_id,
     };
+  }
+}
+
+class Tests {
+  List<Test> items = [];
+  Tests();
+  Tests.fromJsonList(List<dynamic> jsonList) {
+    for (var element in jsonList) {
+      final test = Test.fromJsonMap(element);
+      items.add(test);
+    }
   }
 }

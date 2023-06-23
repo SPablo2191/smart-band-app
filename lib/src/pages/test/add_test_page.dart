@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vital/src/models/exercise_model.dart';
 import 'package:vital/src/models/promotion_model.dart';
+import 'package:vital/src/models/test_model.dart';
 import 'package:vital/src/widgets/appbar_widget.dart';
 import 'package:vital/src/widgets/bottom_navigation_bar_widget.dart';
+import 'package:vital/src/widgets/exercise_dropdown_widget.dart';
 import 'package:vital/src/widgets/promotion_dropdown_widget.dart';
 
 import '../../core/consts/colors.dart';
@@ -22,11 +25,12 @@ class _TestAddPageState extends State<TestAddPage> {
   final SchoolProvider schoolProvider = SchoolProvider();
   final PromotionProvider promotionProvider = PromotionProvider();
   bool _showPromotions = false;
-  bool _showStudents = false;
+  bool _showExercises = false;
   String? _accessToken = '';
   int? _userId = 0;
   School? selectedSchool;
   Promotion? selectedPromotion;
+  Exercise? selectedExercise;
   List<Promotion> promotions = [];
   @override
   void initState() {
@@ -57,7 +61,27 @@ class _TestAddPageState extends State<TestAddPage> {
                   accessToken: _accessToken ?? "",
                   schoolId: selectedSchool!.id!,
                   onPromotionSelected: onPromotionSelected),
-                  
+            if (_showExercises)
+              ExerciseDropdown(
+                  accessToken: _accessToken ?? "",
+                  onExerciseSelected: onExerciseSelected),
+            Container(height: 10),
+            if (_showExercises)
+              UiButton(
+                label: 'Crear Evaluación',
+                color: colorPrimary,
+                context: context,
+                onPressedCallback: () => _saveData(),
+              ),
+            if (_showExercises)
+              Container(
+                height: 5,
+              ),
+            UiButton(
+                label: 'Cancelar',
+                color: colorRed,
+                context: context,
+                onPressedCallback: () => Navigator.pushNamed(context, 'home')),
           ],
         ),
       ),
@@ -159,6 +183,22 @@ class _TestAddPageState extends State<TestAddPage> {
   onPromotionSelected(Promotion? promotion) {
     setState(() {
       selectedPromotion = promotion;
+      _showExercises = true;
     });
+  }
+
+  onExerciseSelected(Exercise? exercise) {
+    setState(() {
+      selectedExercise = exercise;
+    });
+  }
+
+  _saveData() {
+    Test newTest = Test(
+      promotion_id: selectedPromotion!.id,
+      status_test_id: 1,
+      teacher_id: _userId ?? 0,
+    );
+    
   }
 }

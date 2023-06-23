@@ -8,5 +8,6 @@ Map<String, String> getApiRoutes() {
     'classes': '/api/classes',
     'promotions': '/api/promotions',
     'exercises': '/api/exercises',
+    'tests': '/api/tests',
   };
 }

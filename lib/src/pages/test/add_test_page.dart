@@ -19,11 +19,12 @@ class TestAddPage extends StatefulWidget {
 }
 
 class _TestAddPageState extends State<TestAddPage> {
+  final SchoolProvider schoolProvider = SchoolProvider();
+  final PromotionProvider promotionProvider = PromotionProvider();
   bool _showPromotions = false;
   bool _showStudents = false;
   String? _accessToken = '';
-  final SchoolProvider schoolProvider = SchoolProvider();
-  final PromotionProvider promotionProvider = PromotionProvider();
+  int? _userId = 0;
   School? selectedSchool;
   Promotion? selectedPromotion;
   List<Promotion> promotions = [];
@@ -55,7 +56,8 @@ class _TestAddPageState extends State<TestAddPage> {
               PromotionDropdown(
                   accessToken: _accessToken ?? "",
                   schoolId: selectedSchool!.id!,
-                  onPromotionSelected: onPromotionSelected)
+                  onPromotionSelected: onPromotionSelected),
+                  
           ],
         ),
       ),
@@ -151,6 +153,7 @@ class _TestAddPageState extends State<TestAddPage> {
   void _loadData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     _accessToken = prefs.getString('accessToken');
+    _userId = prefs.getInt('userId');
   }
 
   onPromotionSelected(Promotion? promotion) {

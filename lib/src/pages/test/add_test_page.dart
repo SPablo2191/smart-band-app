@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
+import 'package:multi_select_flutter/util/multi_select_item.dart';
+import 'package:multi_select_flutter/util/multi_select_list_type.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vital/src/models/exercise_model.dart';
 import 'package:vital/src/models/promotion_model.dart';
 import 'package:vital/src/models/test_model.dart';
+import 'package:vital/src/providers/exercise_provider.dart';
 import 'package:vital/src/widgets/appbar_widget.dart';
 import 'package:vital/src/widgets/bottom_navigation_bar_widget.dart';
 import 'package:vital/src/widgets/exercise_dropdown_widget.dart';
@@ -30,8 +34,9 @@ class _TestAddPageState extends State<TestAddPage> {
   int? _userId = 0;
   School? selectedSchool;
   Promotion? selectedPromotion;
-  Exercise? selectedExercise;
+  List<Exercise> selectedExercises = [];
   List<Promotion> promotions = [];
+
   @override
   void initState() {
     super.initState();
@@ -61,10 +66,7 @@ class _TestAddPageState extends State<TestAddPage> {
                   accessToken: _accessToken ?? "",
                   schoolId: selectedSchool!.id!,
                   onPromotionSelected: onPromotionSelected),
-            if (_showExercises)
-              ExerciseDropdown(
-                  accessToken: _accessToken ?? "",
-                  onExerciseSelected: onExerciseSelected),
+            if (_showExercises) _getExercises(),
             Container(height: 10),
             if (_showExercises)
               UiButton(
@@ -187,18 +189,73 @@ class _TestAddPageState extends State<TestAddPage> {
     });
   }
 
-  onExerciseSelected(Exercise? exercise) {
-    setState(() {
-      selectedExercise = exercise;
-    });
+  _getExercises() {
+    final ExerciseProvider exerciseProvider = ExerciseProvider();
+    return FutureBuilder(
+      future: exerciseProvider.getExercises(_accessToken),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          final items = snapshot.data
+              ?.map((exercise) => MultiSelectItem<Exercise?>(
+                  exercise, exercise.description ?? ''))
+              .toList() as List<MultiSelectItem<Object?>>;
+          return Container(
+            decoration: BoxDecoration(
+              color: const Color.fromRGBO(221, 245, 246, 1),
+              border: Border.all(
+                color: const Color.fromRGBO(29, 53, 87, 1),
+                width: 1,
+              ),
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            child: MultiSelectDialogField(
+                searchable: true,
+                listType: MultiSelectListType.CHIP,
+                dialogHeight: 160,
+                title: const Text('Seleccionar'),
+                items: items,
+                buttonIcon: const Icon(
+                  Icons.home_filled,
+                  color: Color.fromRGBO(29, 53, 87, 1),
+                ),
+                buttonText: const Text(
+                  "Ejercicios",
+                  style: TextStyle(
+                    color: Color.fromRGBO(29, 53, 87, 1),
+                    fontSize: 16,
+                  ),
+                ),
+                onConfirm: (results) {
+                  List<Exercise> options = [];
+                  for (dynamic element in results) {
+                    options.add(element);
+                  }
+                  selectedExercises = options;
+                }),
+          );
+        } else if (snapshot.hasError) {
+          return Text('${snapshot.error}');
+        }
+        return Container(
+          height: 1,
+          width: 10,
+          margin: const EdgeInsets.all(5),
+          child: const CircularProgressIndicator(
+            strokeWidth: 4,
+            valueColor:
+                AlwaysStoppedAnimation<Color>(Color.fromRGBO(29, 53, 87, 1)),
+          ),
+        );
+      },
+    );
   }
 
   _saveData() {
     Test newTest = Test(
-      promotion_id: selectedPromotion!.id,
-      status_test_id: 1,
-      teacher_id: _userId ?? 0,
-    );
-    
+        promotion_id: selectedPromotion!.id ?? 0,
+        status_test_id: 1,
+        teacher_id: _userId ?? 0,
+        exercises: selectedExercises);
+    print(newTest.exercises);
   }
 }

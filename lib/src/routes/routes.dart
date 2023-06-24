@@ -9,6 +9,7 @@ import 'package:vital/src/pages/register/register_step_2_page.dart';
 import 'package:vital/src/pages/start_page.dart';
 import 'package:vital/src/pages/student/add_student_page.dart';
 import 'package:vital/src/pages/test/add_test_page.dart';
+import 'package:vital/src/pages/test/detail_test_page.dart';
 
 import '../pages/login_page.dart';
 import '../pages/promotion/add_promotion_page.dart';
@@ -29,5 +30,6 @@ Map<String, WidgetBuilder> getRoutes() {
     'student/add': (context) => const StudentAddPage(),
     'promotion/add': (context) => const PromotionAddPage(),
     'test/add': (context) => const TestAddPage(),
+    'test/detail': (context) =>  DetailTestPage()
   };
 }

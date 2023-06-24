@@ -186,7 +186,10 @@ class _HomePageState extends State<HomePage> {
                     itemBuilder: (BuildContext context, int index) {
                       final test = teacher.tests![index];
                       print(test);
-                      return TestCard(test: test);
+                      return TestCard(
+                        test: test,
+                        path: 'test/detail',
+                      );
                     },
                   )
                 else

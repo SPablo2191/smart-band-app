@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vital/src/models/student_model.dart';
 import 'package:vital/src/providers/test_provider.dart';
 import 'package:vital/src/widgets/bottom_navigation_bar_widget.dart';
+import 'package:vital/src/widgets/student_card_widget.dart';
 import 'package:vital/src/widgets/test_detailed_card_widget.dart';
 
+import '../../core/consts/colors.dart';
 import '../../models/test_model.dart';
 import '../../widgets/appbar_widget.dart';
 
@@ -51,13 +54,37 @@ class _DetailTestPageState extends State<DetailTestPage> {
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else if (snapshot.hasData) {
-            final test = snapshot.data!;
+            final Test test = snapshot.data!;
             return Padding(
               padding: const EdgeInsets.all(12.0),
               child: Column(
                 children: [
                   TestDetailedCard(
                     test: test,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 8.0, bottom: 8),
+                    child: Text(
+                      'Estudiantes: ',
+                      style: TextStyle(
+                          color: colorPrimary,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15),
+                    ),
+                  ),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: test.promotion?.students?.length ?? 0,
+                    itemBuilder: (BuildContext context, int index) {
+                      Student selectedStudent = Student(
+                          name: test.promotion?.students?[index]['student']
+                              ['name'],
+                          last_name: test.promotion?.students?[index]['student']
+                              ['last_name'],
+                          DNI: test.promotion?.students?[index]['student']
+                              ['DNI']);
+                      return StudentCard(student: selectedStudent);
+                    },
                   ),
                 ],
               ),

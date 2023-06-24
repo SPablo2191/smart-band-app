@@ -4,7 +4,7 @@ import 'package:vital/src/core/consts/colors.dart';
 import '../models/test_model.dart';
 
 class TestCard extends StatelessWidget {
-  final Test test;
+  final dynamic test;
   const TestCard({required this.test, super.key});
 
   @override

@@ -7,6 +7,7 @@ import 'package:vital/src/models/exercise_model.dart';
 import 'package:vital/src/models/promotion_model.dart';
 import 'package:vital/src/models/test_model.dart';
 import 'package:vital/src/providers/exercise_provider.dart';
+import 'package:vital/src/providers/test_provider.dart';
 import 'package:vital/src/widgets/appbar_widget.dart';
 import 'package:vital/src/widgets/bottom_navigation_bar_widget.dart';
 import 'package:vital/src/widgets/exercise_dropdown_widget.dart';
@@ -250,12 +251,22 @@ class _TestAddPageState extends State<TestAddPage> {
     );
   }
 
-  _saveData() {
+  _saveData() async {
     Test newTest = Test(
         promotion_id: selectedPromotion!.id ?? 0,
         status_test_id: 1,
         teacher_id: _userId ?? 0,
         exercises: selectedExercises);
-    print(newTest.exercises);
+    TestProvider testProvider = TestProvider();
+    bool band = await testProvider.createTest(newTest, _accessToken);
+    if (band) {
+      Navigator.pushNamed(context, 'home');
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Error al crear la evaluación'),
+        ),
+      );
+    }
   }
 }

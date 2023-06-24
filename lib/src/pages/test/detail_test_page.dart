@@ -83,7 +83,10 @@ class _DetailTestPageState extends State<DetailTestPage> {
                               ['last_name'],
                           DNI: test.promotion?.students?[index]['student']
                               ['DNI']);
-                      return StudentCard(student: selectedStudent);
+                      return StudentCard(
+                          student: selectedStudent,
+                          helperText: 'Presiona para registrar resultados...',
+                          onPressedCallback: redirectToResult);
                     },
                   ),
                 ],
@@ -93,6 +96,13 @@ class _DetailTestPageState extends State<DetailTestPage> {
             return const Text('No hay datos');
           }
         });
+  }
+
+  redirectToResult() {
+    Navigator.pushNamed(
+      context,
+      'test/student/result',
+    );
   }
 
   Future<int> _loadData() async {

@@ -307,7 +307,10 @@ class _StudentPageState extends State<StudentPage> {
                     name: studentData['name'],
                     last_name: studentData['last_name'],
                     DNI: studentData['DNI']);
-                return StudentCard(student: student);
+                return StudentCard(
+                  student: student,
+                  helperText: 'Presiona para ver detalle...',
+                );
               },
             )
           else

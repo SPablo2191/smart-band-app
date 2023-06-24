@@ -50,4 +50,23 @@ class TestProvider {
       return [];
     }
   }
+
+  Future<Test> getTestById(int? promotionId, int? teacherId) async {
+    try {
+      final url = Uri.parse('$_url$route/$teacherId/$promotionId');
+      print(url);
+      final resp = await http.get(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      );
+      final decodedData = json.decode(resp.body);
+      final test = Test.fromJsonMap(decodedData);
+      print(decodedData);
+      return test;
+    } catch (e) {
+      return Test();
+    }
+  }
 }

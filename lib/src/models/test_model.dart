@@ -1,5 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:vital/src/models/promotion_model.dart';
+
 class Test {
   int? id;
   int? status_test_id;
@@ -8,7 +10,8 @@ class Test {
   bool? status;
   DateTime? registerDate;
   List<dynamic>? exercises;
-
+  Promotion? promotion;
+  
   Test(
       {this.id,
       this.status,
@@ -16,7 +19,8 @@ class Test {
       this.status_test_id,
       this.teacher_id,
       this.registerDate,
-      this.exercises});
+      this.exercises,
+      this.promotion});
   Test.fromJsonMap(Map<String, dynamic> json) {
     id = json['id'];
     promotion_id = json['promotion_id'];
@@ -25,6 +29,7 @@ class Test {
     status = json['status'];
     registerDate = json['registerDate'];
     exercises = json['exercises'];
+    promotion = Promotion.fromJsonMap(json['promotion']);
   }
 
   Map<String, dynamic> getMap() {

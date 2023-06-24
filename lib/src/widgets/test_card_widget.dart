@@ -20,7 +20,7 @@ class TestCard extends StatelessWidget {
     return InkWell(
       onTap: () {
         // Navegación en función del parámetro
-        Navigator.pushNamed(context, path, arguments: {'id': test['id']});
+        Navigator.pushNamed(context, path, arguments: {'promotion_id': test['promotion']['id']});
       },
       child: SizedBox(
         height: 100,

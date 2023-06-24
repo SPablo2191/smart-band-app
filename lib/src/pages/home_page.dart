@@ -170,7 +170,6 @@ class _HomePageState extends State<HomePage> {
           return Text('Error: ${snapshot.error}');
         } else if (snapshot.hasData) {
           final teacher = snapshot.data!;
-          print('holaa => ${teacher.tests}');
           return Padding(
             padding: const EdgeInsets.all(12.0),
             child: Column(
@@ -186,7 +185,6 @@ class _HomePageState extends State<HomePage> {
                     itemCount: teacher.tests!.length,
                     itemBuilder: (BuildContext context, int index) {
                       final test = teacher.tests![index];
-                      print("holita $test");
                       return TestCard(test: test);
                     },
                   )

@@ -14,7 +14,6 @@ class TestProvider {
     try {
       final url = Uri.parse('$_url$route/${newTest.teacher_id}');
       String body = jsonEncode(newTest.getMap());
-      print(body);
       final resp = await http.post(
         url,
         headers: {

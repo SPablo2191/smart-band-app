@@ -20,10 +20,10 @@ class TestCard extends StatelessWidget {
     return InkWell(
       onTap: () {
         // Navegación en función del parámetro
-        Navigator.pushNamed(context, path, arguments: {'promotion_id': test['promotion']['id']});
+        Navigator.pushNamed(context, path,
+            arguments: {'promotion_id': test['promotion']['id']});
       },
       child: SizedBox(
-        height: 100,
         child: Card(
           color: colorLight,
           child: Column(
@@ -42,7 +42,7 @@ class TestCard extends StatelessWidget {
                     Text(
                       'Clase: ${classroomName}',
                       style: TextStyle(color: colorPrimary),
-                    )
+                    ),
                   ],
                 ),
                 subtitle: Padding(
@@ -57,7 +57,11 @@ class TestCard extends StatelessWidget {
                       Text(
                         'Estado: ${testStatus}',
                         style: TextStyle(color: colorPrimary),
-                      )
+                      ),
+                      Text(
+                        'Cantidad de alumnos: ${test['promotion']['students'].length}',
+                        style: TextStyle(color: colorPrimary),
+                      ),
                     ],
                   ),
                 ),

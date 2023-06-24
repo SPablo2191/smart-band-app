@@ -2,6 +2,8 @@
 
 
 
+import 'package:vital/src/models/school_model.dart';
+
 import 'class_model.dart';
 
 class Promotion {
@@ -13,6 +15,7 @@ class Promotion {
   DateTime? registerDate;
   Class? classroom;
   List<dynamic>? students;
+  School? school;
 
   Promotion(
       {this.id,
@@ -22,7 +25,8 @@ class Promotion {
       this.status,
       this.registerDate,
       this.classroom,
-      this.students});
+      this.students,
+      this.school});
 
   Promotion.fromJsonMap(Map<String, dynamic> json) {
     id = json['id'];
@@ -33,6 +37,7 @@ class Promotion {
     registerDate = json['registerDate'];
     classroom = Class.fromJsonMap(json['prom_class']);
     students = json['students'];
+    school = School.fromJsonMap(json['school']);
   }
   Map<String, dynamic> getMap() {
     List<Map<String, dynamic>> auxStudents = [];

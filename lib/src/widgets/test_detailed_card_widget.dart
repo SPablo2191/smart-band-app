@@ -10,7 +10,6 @@ class TestDetailedCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 100,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
@@ -24,27 +23,52 @@ class TestDetailedCard extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               ListTile(
-                title: Row(
-                  children: [
-                    Text(
-                      "Clase: ${test?.promotion?.classroom?.name}",
-                      style: const TextStyle(color: colorPrimary),
-                    ),
-                    SizedBox(width: 10),
-                    Text(
-                      "Año: ${test?.promotion?.promotion_year?.year}",
-                      style: const TextStyle(color: colorPrimary),
-                    ),
-                  ],
+                title: Text(
+                  "Colegio: ${test?.promotion?.school?.name}",
+                  style: const TextStyle(color: colorPrimary),
                 ),
                 subtitle: Padding(
                   padding: const EdgeInsets.only(top: 8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Row(
+                        children: [
+                          Text(
+                            'Clase: ${test?.promotion?.classroom?.name} ',
+                            style: const TextStyle(color: colorPrimary),
+                          ),
+                          SizedBox(width: 10),
+                          Text(
+                            'Clase: ${test?.promotion?.promotion_year?.year} ',
+                            style: const TextStyle(color: colorPrimary),
+                          ),
+                        ],
+                      ),
                       Text(
-                        'DNI: ',
+                        'Estado: ${test?.statusTest?.description} ',
                         style: const TextStyle(color: colorPrimary),
+                      ),
+                      Text(
+                        'Fecha de Realización: ${test?.getRegisterDate()} ',
+                        style: const TextStyle(color: colorPrimary),
+                      ),
+                      Text(
+                        'Ejercicios: ',
+                        style: const TextStyle(
+                            color: colorPrimary,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15),
+                      ),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: test?.exercises?.length ?? 0,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Text(
+                            test?.exercises?[index]['exercise']['description'],
+                            style: const TextStyle(color: colorPrimary),
+                          );
+                        },
                       ),
                     ],
                   ),

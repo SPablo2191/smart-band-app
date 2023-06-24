@@ -185,6 +185,7 @@ class _HomePageState extends State<HomePage> {
                     itemCount: teacher.tests!.length,
                     itemBuilder: (BuildContext context, int index) {
                       final test = teacher.tests![index];
+                      print(test);
                       return TestCard(test: test);
                     },
                   )

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vital/src/core/consts/colors.dart';
+import 'package:intl/intl.dart';
 
 import '../models/test_model.dart';
 
@@ -9,6 +10,12 @@ class TestCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final DateTime promotionYear =
+        DateTime.parse(test['promotion']['promotion_year']);
+    final String classroomName = test['promotion']['prom_class']['name'];
+    final DateTime registerDate = DateTime.parse(test['register_date']);
+    final formattedDate = DateFormat('dd/MM/yyyy').format(registerDate);
+    final String testStatus = test['status_test']['description'];
     return SizedBox(
       height: 100,
       child: Card(
@@ -18,16 +25,16 @@ class TestCard extends StatelessWidget {
           children: <Widget>[
             ListTile(
               title: Row(
-                children: const [
+                children: [
                   Text(
-                    'Promoción: 2024',
+                    'Promoción: ${promotionYear.year}',
                     style: TextStyle(color: colorPrimary),
                   ),
                   SizedBox(
-                    width: 20,
+                    width: 10,
                   ),
                   Text(
-                    'Clase: 4to Secundaria',
+                    'Clase: ${classroomName}',
                     style: TextStyle(color: colorPrimary),
                   )
                 ],
@@ -36,13 +43,13 @@ class TestCard extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 8.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     Text(
-                      'Fecha de Creación: 14/05/2023',
+                      'Fecha de Creación: ${formattedDate}',
                       style: TextStyle(color: colorPrimary),
                     ),
                     Text(
-                      'Estado: Pendiente',
+                      'Estado: ${testStatus}',
                       style: TextStyle(color: colorPrimary),
                     )
                   ],

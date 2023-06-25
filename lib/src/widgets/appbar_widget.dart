@@ -6,6 +6,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String path;
   final bool showBackButton;
   final bool centerTitle;
+  final Map<String, dynamic>? args;
 
   @override
   final Size preferredSize;
@@ -15,6 +16,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.showBackButton = false,
     this.centerTitle = true,
     this.path = 'home',
+    this.args,
     Key? key,
   })  : preferredSize = const Size.fromHeight(kToolbarHeight),
         super(key: key);
@@ -37,7 +39,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               color: colorPrimary,
             ),
             onPressed: () {
-              Navigator.pushNamed(context, path);
+              Navigator.pushNamed(context, path, arguments: args);
             },
           ),
       ],

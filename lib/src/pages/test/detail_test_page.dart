@@ -77,6 +77,7 @@ class _DetailTestPageState extends State<DetailTestPage> {
                     itemCount: test.promotion?.students?.length ?? 0,
                     itemBuilder: (BuildContext context, int index) {
                       Student selectedStudent = Student(
+                          id: test.promotion?.students?[index]['id'],
                           name: test.promotion?.students?[index]['student']
                               ['name'],
                           last_name: test.promotion?.students?[index]['student']
@@ -84,9 +85,11 @@ class _DetailTestPageState extends State<DetailTestPage> {
                           DNI: test.promotion?.students?[index]['student']
                               ['DNI']);
                       return StudentCard(
-                          student: selectedStudent,
-                          helperText: 'Presiona para registrar resultados...',
-                          onPressedCallback: redirectToResult);
+                        student: selectedStudent,
+                        helperText: 'Presiona para registrar resultados...',
+                        onPressedCallback: () =>
+                            redirectToResult(selectedStudent, promotionId),
+                      );
                     },
                   ),
                 ],
@@ -98,10 +101,11 @@ class _DetailTestPageState extends State<DetailTestPage> {
         });
   }
 
-  redirectToResult() {
+  redirectToResult(Student student, int? promotionId) {
     Navigator.pushNamed(
       context,
       'test/student/result',
+      arguments: {'student': student, 'promotion_id': promotionId},
     );
   }
 

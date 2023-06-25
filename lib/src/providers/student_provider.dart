@@ -59,7 +59,6 @@ class StudentProvider {
     try {
       final url = Uri.parse('$_url$route/${studentUpdated.id}');
       String body = jsonEncode(studentUpdated.getMap());
-      print(body);
       final resp = await http.put(
         url,
         headers: {

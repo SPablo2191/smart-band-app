@@ -54,7 +54,6 @@ class TestProvider {
   Future<Test> getTestById(int? promotionId, int? teacherId) async {
     try {
       final url = Uri.parse('$_url$route/$teacherId/$promotionId');
-      print(url);
       final resp = await http.get(
         url,
         headers: {
@@ -63,10 +62,35 @@ class TestProvider {
       );
       final decodedData = json.decode(resp.body);
       final test = Test.fromJsonMap(decodedData);
-      print(decodedData);
       return test;
     } catch (e) {
       return Test();
+    }
+  }
+
+  Future<bool> updateTest(Test testUpdated, String? accessToken) async {
+    try {
+      final url = Uri.parse(
+          '$_url$route/${testUpdated.teacher_id}/${testUpdated.promotion_id}');
+      String body = jsonEncode(testUpdated.getMap2());
+      print(body);
+      final resp = await http.put(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $accessToken',
+        },
+        body: body,
+      );
+
+      if (resp.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print(e);
+      return false;
     }
   }
 }

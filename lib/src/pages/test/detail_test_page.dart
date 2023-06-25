@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vital/src/models/student_model.dart';
+import 'package:vital/src/models/teacher_model.dart';
 import 'package:vital/src/providers/test_provider.dart';
 import 'package:vital/src/widgets/bottom_navigation_bar_widget.dart';
 import 'package:vital/src/widgets/student_card_widget.dart';
@@ -9,6 +10,7 @@ import 'package:vital/src/widgets/test_detailed_card_widget.dart';
 import '../../core/consts/colors.dart';
 import '../../models/test_model.dart';
 import '../../widgets/appbar_widget.dart';
+import '../../widgets/ui/ui_button_widget.dart';
 
 class DetailTestPage extends StatefulWidget {
   const DetailTestPage({super.key});
@@ -20,9 +22,11 @@ class DetailTestPage extends StatefulWidget {
 class _DetailTestPageState extends State<DetailTestPage> {
   final TestProvider testProvider = TestProvider();
   int? _userId = 0;
+  String? _accessToken = '';
   @override
   void initState() {
     super.initState();
+    _loadData();
   }
 
   @override
@@ -76,7 +80,6 @@ class _DetailTestPageState extends State<DetailTestPage> {
                     shrinkWrap: true,
                     itemCount: test.promotion?.students?.length ?? 0,
                     itemBuilder: (BuildContext context, int index) {
-                      print(test.promotion?.students?[index]);
                       Student selectedStudent = Student(
                         id: test.promotion?.students?[index]['student']['id'],
                         name: test.promotion?.students?[index]['student']
@@ -102,6 +105,23 @@ class _DetailTestPageState extends State<DetailTestPage> {
                       );
                     },
                   ),
+                  UiButton(
+                    label: 'Finalizar Evaluación',
+                    color: colorPrimary,
+                    context: context,
+                    onPressedCallback: () => _saveData(promotionId),
+                  ),
+                  Container(
+                    height: 5,
+                  ),
+                  UiButton(
+                      label: 'Cancelar',
+                      color: colorRed,
+                      context: context,
+                      onPressedCallback: () => Navigator.pushNamed(
+                            context,
+                            'home',
+                          )),
                 ],
               ),
             );
@@ -122,6 +142,28 @@ class _DetailTestPageState extends State<DetailTestPage> {
   Future<int> _loadData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     _userId = prefs.getInt('userId');
+    _accessToken = prefs.getString('accessToken');
     return _userId ?? 0;
+  }
+
+  _saveData(int? promotionId) async {
+    Test test = await _loadData()
+        .then((value) => testProvider.getTestById(promotionId!, value));
+    test.promotion_id = test.promotion?.id;
+    test.teacher_id = _userId;
+    test.status_test_id = 2;
+    bool band = await testProvider.updateTest(test, _accessToken);
+    if (band) {
+      Navigator.pushNamed(
+        context,
+        'home',
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Error al finalizar la evaluación'),
+        ),
+      );
+    }
   }
 }

@@ -52,6 +52,14 @@ class Test {
       'exercises': auxExercises,
     };
   }
+  Map<String, dynamic> getMap2() {
+
+    return {
+      'promotion_id': promotion_id,
+      'status_test_id': status_test_id,
+      'teacher_id': teacher_id,
+    };
+  }
 }
 
 class Tests {

@@ -345,7 +345,6 @@ class _TestResultPageState extends State<TestResultPage> {
     _newResult.student_id = student?.id;
     _newResult.result = 1;
     student?.result = _newResult;
-    print(student?.getMap());
     StudentProvider studentProvider = StudentProvider();
     bool band = await studentProvider.updateStudent(student!, _accessToken!);
     if (band) {

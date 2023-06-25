@@ -53,4 +53,29 @@ class StudentProvider {
       return [];
     }
   }
+
+  Future<bool> updateStudent(
+      Student studentUpdated, String? accessToken) async {
+    try {
+      final url = Uri.parse('$_url$route/${studentUpdated.id}');
+      String body = jsonEncode(studentUpdated.getMap());
+      print(body);
+      final resp = await http.put(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $accessToken',
+        },
+        body: body,
+      );
+
+      if (resp.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      return false;
+    }
+  }
 }

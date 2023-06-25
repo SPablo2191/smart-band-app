@@ -7,6 +7,7 @@ class Result {
   double? average_heart_rate;
   String? average_rate;
   double? average_speed;
+  double? distance;
   double? average_cadene;
   double? average_stride;
   double? result;
@@ -27,6 +28,7 @@ class Result {
       this.average_stride,
       this.result,
       this.device_name,
+      this.distance,
       this.exercise_test_id,
       this.student_id,
       this.status,
@@ -42,6 +44,7 @@ class Result {
     average_stride = json['average_stride'];
     result = json['result'];
     device_name = json['device_name'];
+    distance = json['distance'];
     exercise_test_id = json['exercise_test_id'];
     student_id = json['student_id'];
     status = json['status'];
@@ -62,10 +65,9 @@ class Result {
       'device_name': device_name,
       'exercise_test_id': exercise_test_id,
       'student_id': student_id,
+      'distance': distance,
     };
   }
-
-
 }
 
 class Results {

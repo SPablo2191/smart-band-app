@@ -1,3 +1,5 @@
+import 'package:vital/src/models/result_model.dart';
+
 class Student {
   int? id;
   // ignore: non_constant_identifier_names
@@ -15,6 +17,7 @@ class Student {
   bool? status;
   DateTime? registerDate;
   bool isSelected = false;
+  Result? result;
   Student(
       {this.id,
       // ignore: non_constant_identifier_names
@@ -30,6 +33,7 @@ class Student {
       this.seat_height,
       this.status,
       this.registerDate,
+      this.result,
       this.isSelected = false});
   Student.fromJsonMap(Map<String, dynamic> json) {
     id = json['id'];
@@ -56,6 +60,7 @@ class Student {
       'weight': weight,
       'size': size,
       'waist': waist,
+      'result' : result?.getMap(),
     };
   }
 

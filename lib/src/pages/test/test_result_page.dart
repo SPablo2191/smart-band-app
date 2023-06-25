@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vital/src/core/consts/colors.dart';
+import 'package:vital/src/providers/student_provider.dart';
 import 'package:vital/src/widgets/appbar_widget.dart';
 import 'package:vital/src/widgets/bottom_navigation_bar_widget.dart';
 import 'package:vital/src/widgets/exercise_dropdown_widget.dart';
@@ -9,6 +10,7 @@ import 'package:vital/src/widgets/exercise_dropdown_widget.dart';
 import '../../models/exercise_model.dart';
 import '../../models/result_model.dart';
 import '../../models/student_model.dart';
+import '../../widgets/ui/ui_button_widget.dart';
 
 class TestResultPage extends StatefulWidget {
   const TestResultPage({super.key});
@@ -20,6 +22,7 @@ class TestResultPage extends StatefulWidget {
 class _TestResultPageState extends State<TestResultPage> {
   final Result _newResult = Result();
   String? _accessToken = '';
+  Student? student = Student();
   Exercise? selectedExercise;
   @override
   void initState() {
@@ -37,8 +40,8 @@ class _TestResultPageState extends State<TestResultPage> {
   Widget build(BuildContext context) {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    final Student? student = args['student'];
-    final int? promotionId = args != null ? args['promotion_id'] : null;
+    student = args['student'];
+    final int? promotionId = args['promotion_id'];
     return Scaffold(
       appBar: CustomAppBar(
         title: 'Registrar Resultado',
@@ -55,7 +58,7 @@ class _TestResultPageState extends State<TestResultPage> {
           children: [
             Center(
               child: Text(
-                'Estudiante: ${student!.name} ${student.last_name}',
+                'Estudiante: ${student!.name} ${student?.last_name} ',
                 style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -66,6 +69,8 @@ class _TestResultPageState extends State<TestResultPage> {
             _getDeviceName(),
             const SizedBox(height: 10.0),
             _getNumberSteps(),
+            const SizedBox(height: 10.0),
+            _getDistance(),
             const SizedBox(height: 10.0),
             _getCalories(),
             const SizedBox(height: 10.0),
@@ -79,7 +84,23 @@ class _TestResultPageState extends State<TestResultPage> {
             const SizedBox(height: 10.0),
             _getAverageStride(),
             const SizedBox(height: 10.0),
-            _getExercises()
+            _getExercises(),
+            UiButton(
+              label: 'Registrar Resultado',
+              color: colorPrimary,
+              context: context,
+              onPressedCallback: () => _saveData(promotionId),
+            ),
+            Container(
+              height: 5,
+            ),
+            UiButton(
+                label: 'Cancelar',
+                color: colorRed,
+                context: context,
+                onPressedCallback: () => Navigator.pushNamed(
+                    context, 'test/detail',
+                    arguments: {'promotion_id': promotionId})),
           ],
         ),
       ),
@@ -162,7 +183,7 @@ class _TestResultPageState extends State<TestResultPage> {
   _getAverageRate() {
     return TextField(
       onChanged: (value) => setState(() {
-        _newResult.calories = value;
+        _newResult.average_rate = value;
       }),
       decoration: InputDecoration(
         filled: true,
@@ -292,5 +313,48 @@ class _TestResultPageState extends State<TestResultPage> {
             : const Center(child: CircularProgressIndicator());
       },
     );
+  }
+
+  _getDistance() {
+    return TextField(
+      onChanged: (value) => setState(() {
+        _newResult.distance = double.tryParse(value);
+      }),
+      decoration: InputDecoration(
+        filled: true,
+        iconColor: colorPrimary,
+        labelStyle: const TextStyle(color: colorPrimary),
+        floatingLabelStyle: const TextStyle(color: colorPrimary),
+        hintStyle: const TextStyle(color: colorPrimary),
+        fillColor: colorLight,
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20.0),
+            borderSide: const BorderSide(color: colorPrimary)),
+        labelText: 'Distancia',
+        prefixIcon: const Icon(Icons.perm_identity),
+      ),
+      inputFormatters: [
+        FilteringTextInputFormatter.digitsOnly, // Permite solo dígitos
+      ],
+      keyboardType: TextInputType.number,
+    );
+  }
+
+  _saveData(int? promotionId) async {
+    _newResult.exercise_test_id = selectedExercise?.id;
+    _newResult.student_id = student?.id;
+    _newResult.result = 1;
+    student?.result = _newResult;
+    print(student?.getMap());
+    StudentProvider studentProvider = StudentProvider();
+    bool band = await studentProvider.updateStudent(student!, _accessToken!);
+    if (band) {
+      Navigator.pushNamed(context, 'test/detail',
+          arguments: {'promotion_id': promotionId});
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Error al guardar el resultado'),
+      ));
+    }
   }
 }

@@ -76,14 +76,24 @@ class _DetailTestPageState extends State<DetailTestPage> {
                     shrinkWrap: true,
                     itemCount: test.promotion?.students?.length ?? 0,
                     itemBuilder: (BuildContext context, int index) {
+                      print(test.promotion?.students?[index]);
                       Student selectedStudent = Student(
-                          id: test.promotion?.students?[index]['id'],
-                          name: test.promotion?.students?[index]['student']
-                              ['name'],
-                          last_name: test.promotion?.students?[index]['student']
-                              ['last_name'],
-                          DNI: test.promotion?.students?[index]['student']
-                              ['DNI']);
+                        id: test.promotion?.students?[index]['student']['id'],
+                        name: test.promotion?.students?[index]['student']
+                            ['name'],
+                        last_name: test.promotion?.students?[index]['student']
+                            ['last_name'],
+                        DNI: test.promotion?.students?[index]['student']['DNI'],
+                        age: test.promotion?.students?[index]['student']['age'],
+                        waist: test.promotion?.students?[index]['student']
+                            ['waist'],
+                        weight: test.promotion?.students?[index]['student']
+                            ['weight'],
+                        seat_height: test.promotion?.students?[index]['student']
+                            ['seat_height'],
+                        size: test.promotion?.students?[index]['student']
+                            ['size'],
+                      );
                       return StudentCard(
                         student: selectedStudent,
                         helperText: 'Presiona para registrar resultados...',

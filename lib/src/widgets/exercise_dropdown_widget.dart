@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vital/src/core/consts/colors.dart';
-import 'package:vital/src/models/exercise_model.dart';
-import 'package:vital/src/providers/exercise_provider.dart';
+import 'package:smartband/src/core/consts/colors.dart';
+import 'package:smartband/src/models/exercise_model.dart';
+import 'package:smartband/src/providers/exercise_provider.dart';
 
 class ExerciseDropdown extends StatefulWidget {
   final String accessToken;

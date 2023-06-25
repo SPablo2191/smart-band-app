@@ -1,4 +1,4 @@
-import 'package:vital/src/models/result_model.dart';
+import 'package:smartband/src/models/result_model.dart';
 
 class Student {
   int? id;

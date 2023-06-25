@@ -1,15 +1,15 @@
 // import 'dart:js';
 
 import 'package:flutter/material.dart';
-import 'package:vital/src/pages/home_page.dart';
-import 'package:vital/src/pages/profile/edit_profile_page.dart';
-import 'package:vital/src/pages/profile/profile_page.dart';
-import 'package:vital/src/pages/promotion/promotion_page.dart';
-import 'package:vital/src/pages/register/register_step_2_page.dart';
-import 'package:vital/src/pages/start_page.dart';
-import 'package:vital/src/pages/student/add_student_page.dart';
-import 'package:vital/src/pages/test/add_test_page.dart';
-import 'package:vital/src/pages/test/detail_test_page.dart';
+import 'package:smartband/src/pages/home_page.dart';
+import 'package:smartband/src/pages/profile/edit_profile_page.dart';
+import 'package:smartband/src/pages/profile/profile_page.dart';
+import 'package:smartband/src/pages/promotion/promotion_page.dart';
+import 'package:smartband/src/pages/register/register_step_2_page.dart';
+import 'package:smartband/src/pages/start_page.dart';
+import 'package:smartband/src/pages/student/add_student_page.dart';
+import 'package:smartband/src/pages/test/add_test_page.dart';
+import 'package:smartband/src/pages/test/detail_test_page.dart';
 
 import '../pages/login_page.dart';
 import '../pages/promotion/add_promotion_page.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
-import 'package:vital/src/models/school_model.dart';
-import 'package:vital/src/providers/auth_provider.dart';
-import 'package:vital/src/providers/school_provider.dart';
+import 'package:smartband/src/models/school_model.dart';
+import 'package:smartband/src/providers/auth_provider.dart';
+import 'package:smartband/src/providers/school_provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../models/teacher_model.dart';
 import '../../widgets/appbar_widget.dart';

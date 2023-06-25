@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:vital/src/pages/test/detail_test_page.dart';
-import 'package:vital/src/routes/routes.dart';
+import 'package:smartband/src/pages/test/detail_test_page.dart';
+import 'package:smartband/src/routes/routes.dart';
 
 Future<void> main() async {
   await dotenv.load();

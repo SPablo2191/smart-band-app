@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vital/src/core/consts/colors.dart';
+import 'package:smartband/src/core/consts/colors.dart';
 import 'package:intl/intl.dart';
 
 import '../models/test_model.dart';

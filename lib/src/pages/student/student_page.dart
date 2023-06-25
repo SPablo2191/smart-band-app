@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vital/src/core/consts/colors.dart';
-import 'package:vital/src/models/promotion_model.dart';
-import 'package:vital/src/models/student_model.dart';
-import 'package:vital/src/providers/promotion_provider.dart';
-import 'package:vital/src/widgets/appbar_widget.dart';
-import 'package:vital/src/widgets/bottom_navigation_bar_widget.dart';
-import 'package:vital/src/widgets/student_card_widget.dart';
-import 'package:vital/src/widgets/ui/ui_button_widget.dart';
+import 'package:smartband/src/core/consts/colors.dart';
+import 'package:smartband/src/models/promotion_model.dart';
+import 'package:smartband/src/models/student_model.dart';
+import 'package:smartband/src/providers/promotion_provider.dart';
+import 'package:smartband/src/widgets/appbar_widget.dart';
+import 'package:smartband/src/widgets/bottom_navigation_bar_widget.dart';
+import 'package:smartband/src/widgets/student_card_widget.dart';
+import 'package:smartband/src/widgets/ui/ui_button_widget.dart';
 
 import '../../models/school_model.dart';
 import '../../providers/school_provider.dart';

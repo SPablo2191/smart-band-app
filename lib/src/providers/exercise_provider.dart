@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
-import 'package:vital/src/core/consts/api_route_map.dart';
+import 'package:smartband/src/core/consts/api_route_map.dart';
 
 
 import '../models/exercise_model.dart';

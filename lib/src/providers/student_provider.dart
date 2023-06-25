@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
-import 'package:vital/src/core/consts/api_route_map.dart';
-import 'package:vital/src/models/student_model.dart';
+import 'package:smartband/src/core/consts/api_route_map.dart';
+import 'package:smartband/src/models/student_model.dart';
 
 class StudentProvider {
   final String _url = dotenv.env['API_URL'] ?? 'API_URL not found';

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vital/src/core/consts/colors.dart';
-import 'package:vital/src/providers/student_provider.dart';
-import 'package:vital/src/widgets/appbar_widget.dart';
-import 'package:vital/src/widgets/bottom_navigation_bar_widget.dart';
-import 'package:vital/src/widgets/exercise_dropdown_widget.dart';
+import 'package:smartband/src/core/consts/colors.dart';
+import 'package:smartband/src/providers/student_provider.dart';
+import 'package:smartband/src/widgets/appbar_widget.dart';
+import 'package:smartband/src/widgets/bottom_navigation_bar_widget.dart';
+import 'package:smartband/src/widgets/exercise_dropdown_widget.dart';
 
 import '../../models/exercise_model.dart';
 import '../../models/result_model.dart';

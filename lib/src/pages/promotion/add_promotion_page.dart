@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vital/src/providers/promotion_provider.dart';
-import 'package:vital/src/widgets/appbar_widget.dart';
-import 'package:vital/src/widgets/bottom_navigation_bar_widget.dart';
-import 'package:vital/src/widgets/class_dropdown_widget.dart';
+import 'package:smartband/src/providers/promotion_provider.dart';
+import 'package:smartband/src/widgets/appbar_widget.dart';
+import 'package:smartband/src/widgets/bottom_navigation_bar_widget.dart';
+import 'package:smartband/src/widgets/class_dropdown_widget.dart';
 
 import '../../core/consts/colors.dart';
 import '../../models/class_model.dart';

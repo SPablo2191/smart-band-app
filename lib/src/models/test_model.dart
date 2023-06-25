@@ -1,7 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:vital/src/models/promotion_model.dart';
-import 'package:vital/src/models/status_test_model.dart';
+import 'package:smartband/src/models/promotion_model.dart';
+import 'package:smartband/src/models/status_test_model.dart';
 import 'package:intl/intl.dart';
 
 class Test {

@@ -2,7 +2,7 @@
 
 
 
-import 'package:vital/src/models/school_model.dart';
+import 'package:smartband/src/models/school_model.dart';
 
 import 'class_model.dart';
 

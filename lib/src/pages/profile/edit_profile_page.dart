@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vital/src/widgets/ui/ui_button_widget.dart';
+import 'package:smartband/src/widgets/ui/ui_button_widget.dart';
 
 import '../../core/consts/colors.dart';
 import '../../models/school_model.dart';

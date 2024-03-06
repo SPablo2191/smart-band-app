@@ -4,8 +4,9 @@
 
 Bievenido al aplicativo movil para la materia Tecnologias Moviles.
 Este proyecto emplea Flutter, Flask y Scikit-learn para una app móvil que evalúa la salud con datos de Smart Bands y Machine Learning. Automatiza evaluaciones de competencia motora en escolares estándar de Arequipa (9-17 años), mejorando la atención médica escolar.
-[Backend](https://github.com/SPablo2191/smart-band-api)
-[Machine Learning Model](https://github.com/SPablo2191/ml-practice-smartband)
+Otros elementos del proyecto:
+- [Backend](https://github.com/SPablo2191/smart-band-api)
+- [Machine Learning Model](https://github.com/SPablo2191/ml-practice-smartband)
 
 ## Tabla de contenidos:
 
